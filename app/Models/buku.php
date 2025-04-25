@@ -9,11 +9,15 @@ class buku extends Model
 {
     Use HasFactory;
     protected $fillable = [
-        'id_buku',
         'judul',
         'penulis',
         'penerbit',
         'tahun_terbit',
         'genre'
     ];
+
+    public function peminjaman(){
+        return $this->hasOne(peminjaman::class);
+        // ibarat in one flight must has a many seats right? not only ine but more than one.
+    }
 }

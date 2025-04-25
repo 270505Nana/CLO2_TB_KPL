@@ -12,11 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('peminjamen', function (Blueprint $table) {
-            $table->id_peminjaman();
-            $table->foreignID('id_mahasiswa')-> references ('id_mahasiswa') -> on('Flight_classes') -> onDelete('cascade');
-            $table->id_peminjaman();
-            $table->id_peminjaman();
-            $table->id_peminjaman();
+            $table->id();
+            $table->foreignID('id_mahasiswa')-> references ('id') -> on('mahasiswas') -> onDelete('cascade');
+            $table->foreignID('id_buku')-> references ('id') -> on('bukus') -> onDelete('cascade');
+            $table->date('tanggal_pinjam');
+            $table->date('tanggal_kembali');
             $table->timestamps();
         });
     }

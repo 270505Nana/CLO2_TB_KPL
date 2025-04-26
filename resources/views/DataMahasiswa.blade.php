@@ -80,7 +80,7 @@
   </aside>
 
   <main class="main-content position-relative border-radius-lg ">
-    <!-- Navbar atas pencarian & sign in-->
+    <!-- Navbar atas pencarian & sign in serta nama page-->
     <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl " id="navbarBlur" data-scroll="false">
       <div class="container-fluid py-1 px-3">
         <nav aria-label="breadcrumb">
@@ -119,167 +119,39 @@
 
             {{-- CARD ATAS --}}
             <div class="card-header pb-0">
-              <h6>Tabel Data Buku</h6>
-              <a class="btn btn-success btn-sm ms-auto" href="/tambahdatamahasiswa">Tambah Buku</a>
+              <h6>Tabel Data Mahasiswa</h6>
+              <a class="btn btn-success btn-sm ms-auto" href="/tambahdatamahasiswa">Tambah Data Mahasiswa</a>
             </div>
+
             <div class="card-body px-0 pt-0 pb-2">
               <div class="table-responsive p-0">
-                <table class="table align-items-center mb-0">
+                <table class="table table-hover align-items-center mb-0">
                   <thead>
                     <tr>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Judul buku</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Penulis</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Penerbit</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tahun Terbit</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Genre</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Aksi</th>
-                      {{-- <th class="text-secondary opacity-7"></th> --}}
+                      <th scope="col" class="text-secondary text-xxs font-weight-bolder opacity-7" > NIM</th>
+                      <th scope="col" class="text-secondary text-xxs font-weight-bolder opacity-7"> Prodi mahasiswa</th>
+                      <th scope="col" class="text-secondary text-xxs font-weight-bolder opacity-7"> Nama mahasiswa</th>
+                      <th scope="col" class="text-secondary text-xxs font-weight-bolder opacity-7"> Fakultas mahasiswa</th>
+                      <th scope="col" class="text-secondary text-xxs font-weight-bolder opacity-7"> Angkatan</th>
+                      <th scope="col" class="text-secondary text-xxs font-weight-bolder opacity-7"> Nomor HP</th>
+                      <th scope="col" class="text-secondary text-xxs font-weight-bolder opacity-7"> Aksi</th>
                     </tr>
                   </thead>
-                  <tbody>
-
-                    {{-- TABEL DATA. NNTI NAMPILIN FOR BUAT DATA NGAMBIL DARI DB DITAMPILIN DISINI --}}
+                  <tbody class="table-group-divider ml-3">
                     <tr>
-                      <td>
-                        <div class="d-flex px-2 py-1">
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">Harry potter</h6>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <p class="text-xs font-weight-bold mb-0">Manager</p>
-                      </td>
-                      <td>
-                        <p class="text-xs font-weight-bold mb-0">Manager</p>
-                      </td>
-                      <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">2018</span>
-                      </td>
-                      </td>
-                      <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">Fantasy</span>
-                      </td>
-
-                      {{-- BUTTON BUAT AKSI! EDIT DLL --}}
-                      <td class="align-right">
-                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                          <i class="ni ni-ruler-pencil text-lg opacity-10" aria-hidden="true"></i>
+                      <td class="text-start text-xs" >2311104016</td>
+                      <td class="text-start text-xs" >Prajna paramitha</td>
+                      <td class="text-start text-xs" >Otto</td>
+                      <td class="text-start text-xs" >Teknik</td>
+                      <td class="text-start text-xs" >2020</td>
+                      <td class="text-start text-xs" >08123456789</td>
+                      <td class="text-center">
+                        <a href="/editmahasiswa" class="text-secondary mx-2">
+                          <i class="ni ni-ruler-pencil text-lg" aria-hidden="true"></i>
                         </a>
-
-                        <a href="javascript:;" class="text-secondary font-weight-bold text-s" data-toggle="tooltip" data-original-title="Edit user">
-                          <i class="ni ni-fat-remove text-3xl " aria-hidden="true"></i>
+                        <a href="/deletemahasiswa" class="text-secondary mx-2">
+                          <i class="ni ni-fat-remove text-lg" aria-hidden="true"></i>
                         </a>
-
-                      </td>
-                      </td>
-                    </tr>
-                    
-                    <tr>
-                      <td>
-                        <div class="d-flex px-2 py-1">
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">Harry potter</h6>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <p class="text-xs font-weight-bold mb-0">Manager</p>
-                      </td>
-                      <td>
-                        <p class="text-xs font-weight-bold mb-0">Manager</p>
-                      </td>
-                      <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">2018</span>
-                      </td>
-                      </td>
-                      <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">Fantasy</span>
-                      </td>
-
-                      {{-- BUTTON BUAT AKSI! EDIT DLL --}}
-                      <td class="align-right">
-                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                          <i class="ni ni-ruler-pencil text-lg opacity-10" aria-hidden="true"></i>
-                        </a>
-
-                        <a href="javascript:;" class="text-secondary font-weight-bold text-s" data-toggle="tooltip" data-original-title="Edit user">
-                          <i class="ni ni-fat-remove text-3xl " aria-hidden="true"></i>
-                        </a>
-
-                      </td>
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td>
-                        <div class="d-flex px-2 py-1">
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">Harry potter</h6>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <p class="text-xs font-weight-bold mb-0">Manager</p>
-                      </td>
-                      <td>
-                        <p class="text-xs font-weight-bold mb-0">Manager</p>
-                      </td>
-                      <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">2018</span>
-                      </td>
-                      </td>
-                      <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">Fantasy</span>
-                      </td>
-
-                      {{-- BUTTON BUAT AKSI! EDIT DLL --}}
-                      <td class="align-right">
-                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                          <i class="ni ni-ruler-pencil text-lg opacity-10" aria-hidden="true"></i>
-                        </a>
-
-                        <a href="javascript:;" class="text-secondary font-weight-bold text-s" data-toggle="tooltip" data-original-title="Edit user">
-                          <i class="ni ni-fat-remove text-3xl " aria-hidden="true"></i>
-                        </a>
-
-                      </td>
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td>
-                        <div class="d-flex px-2 py-1">
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">Harry potter</h6>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <p class="text-xs font-weight-bold mb-0">Manager</p>
-                      </td>
-                      <td>
-                        <p class="text-xs font-weight-bold mb-0">Manager</p>
-                      </td>
-                      <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">2018</span>
-                      </td>
-                      </td>
-                      <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">Fantasy</span>
-                      </td>
-
-                      {{-- BUTTON BUAT AKSI! EDIT DLL --}}
-                      <td class="align-right">
-                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                          <i class="ni ni-ruler-pencil text-lg opacity-10" aria-hidden="true"></i>
-                        </a>
-
-                        <a href="javascript:;" class="text-secondary font-weight-bold text-s" data-toggle="tooltip" data-original-title="Edit user">
-                          <i class="ni ni-fat-remove text-3xl " aria-hidden="true"></i>
-                        </a>
-
-                      </td>
                       </td>
                     </tr>
                   </tbody>

@@ -12,16 +12,14 @@ class peminjaman extends Model
         'tanggal_pinjam',
         'tanggal_kembali'
     ];
-
-    public function mahasiswa(){
-        return $this->belongsTo(mahasiswa::class);
-        // dalam suatu penerbangan pasti ada jumlah kursinya, jadi ini belongsto flight info penerbangan
-        
-    }
     
-    public function buku(){
-        return $this->belongsTo(buku::class);
-        // dalam suatu penerbangan pasti ada jumlah kursinya, jadi ini belongsto flight info penerbangan
-        
+    public function mahasiswa()
+    {
+        return $this->belongsTo(Mahasiswa::class, 'nim', 'nim');
+    }
+
+    public function buku()
+    {
+        return $this->belongsTo(Buku::class, 'id_buku');
     }
 }

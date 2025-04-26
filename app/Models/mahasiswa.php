@@ -16,10 +16,10 @@ class mahasiswa extends Model
         'angkatan',
         'nomor_hp',
     ];
-
-    public function peminjaman(){
-        return $this->hasMany(Peminjaman::class);
-        // ibarat in one flight must has a many seats right? not only ine but more than one.
+    public function peminjaman()
+    {
+        return $this->hasMany(Peminjaman::class, 'nim', 'nim');
+        // ibarat satu mahasiswa pasti punya banyak peminjaman atau buku yang dipinjam
     }
 }
 

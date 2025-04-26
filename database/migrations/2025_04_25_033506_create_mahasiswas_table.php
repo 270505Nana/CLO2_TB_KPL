@@ -12,9 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('mahasiswas', function (Blueprint $table) {
-            $table->id();
+            $table->unsignedBigInteger('nim')->primary(); // NIM sebagai primary key
             $table->String('nama');
-            $table->integer('nim');
             $table->String('prodi');
             $table->String('fakultas');
             $table->integer('angkatan');

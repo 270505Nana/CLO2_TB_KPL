@@ -84,13 +84,6 @@
     <!-- Navbar -->
     <nav class="navbar navbar-main navbar-expand-lg bg-transparent shadow-none position-absolute px-4 w-100 z-index-2 mt-n11">
       <div class="container-fluid py-1">
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 ps-2 me-sm-6 me-5">
-            <li class="breadcrumb-item text-sm"><a class="text-white opacity-5" href="javascript:;">Pages</a></li>
-            <li class="breadcrumb-item text-sm text-white active" aria-current="page">Profile</li>
-          </ol>
-          <h6 class="text-white font-weight-bolder ms-2">Profile</h6>
-        </nav>
         <div class="collapse navbar-collapse me-md-0 me-sm-4 mt-sm-0 mt-2" id="navbar">
           <div class="ms-md-auto pe-md-3 d-flex align-items-center">
             <div class="input-group">
@@ -133,7 +126,7 @@
           <div class="col-auto my-auto">
             <div class="h-100">
               <h5 class="mb-1">
-                Form Tambah Data Buku
+                Form Tambah Data Mahasiswa
               </h5>
             </div>
           </div>
@@ -154,7 +147,7 @@
               {{-- klo masih bingung bisa usaha chat gpt aja dulu, nnti klo udah paham sma udh ketemu baru chat grup --}}
               <div class="d-flex align-items-center">
                 {{-- <p class="mb-0">Edit Profile</p> --}}
-                <button class="btn btn-success btn-sm ms-auto">Tambah Buku</button>
+                <button class="btn btn-success btn-sm ms-auto">Tambah Data Mahasiswa</button>
               </div>
             </div>
 
@@ -166,37 +159,44 @@
 
                   {{-- form judul --}}
                   <div class="form-group">
-                    <label for="example-text-input" class="form-control-label">Judul Buku</label>
-                    <input class="form-control" type="text" name = "judul" placeholder="Masukkan Judul Buku" id="judul" required>
+                    <label for="example-text-input" class="form-control-label">Nama mahasiswa</label>
+                    <input class="form-control" type="text" name = "nama" placeholder="Masukkan Nama Mahasiswa" id="nama" required>
                   </div>
                 </div>
 
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label for="example-text-input" class="form-control-label">Penulis Buku</label>
+                    <label for="example-text-input" class="form-control-label">NIM Mahasiswa</label>
                     {{-- nana : pastikan id sama nameharus sama kaya ditabel ya klo engga nnti dia ga kekirim ke db --}}
-                    <input class="form-control" type="text" name = "penulis" placeholder="Masukkan Penulis Buku" id = "penulis" required>
+                    <input class="form-control" type="text" name = "nim" placeholder="Masukkan NIM Mahasiswa" id = "nim" required>
                   </div>
                 </div>
 
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label for="example-text-input" class="form-control-label">Penerbit</label>
-                    <input class="form-control" type="text" name = "penerbit" placeholder="Masukkan Penerbit" id = "penerbit" required>
+                    <label for="example-text-input" class="form-control-label">Prodi</label>
+                    <input class="form-control" type="text" name = "prodi" placeholder="Masukkan Prodi Mahasiswa" id = "prodi" required>
                   </div>
                 </div>
 
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label for="example-text-input" class="form-control-label">Tahun Terbit</label>
-                    <input type="number" name="tahun_terbit" min="1900" max="2099" step="1" class="form-control" placeholder="Masukkan tahun terbit" required>
+                    <label for="example-text-input" class="form-control-label">Fakultas</label>
+                    <input type="text" name="fakultas" class="form-control" placeholder="Masukkan Fakultas Mahasiswa" id = "fakultas" required>
                   </div>
                 </div>
 
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label for="example-text-input" class="form-control-label">Genre Buku</label>
-                    <input type="text" name="genre" class="form-control" placeholder="Masukkan genre buku" required>
+                    <label for="example-text-input" class="form-control-label">Angkatan/Tahun Masuk Mahasiswa</label>
+                    <input type="number" name="angkatan" class="form-control" placeholder="Masukkan tahun masuk mahasiswa" required>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="example-text-input" class="form-control-label">Nomor Handphone Mahasiswa</label>
+                    <input type="number" name="nomor_hp" class="form-control" placeholder="Masukkan nomor telepon mahasiswa" required>
                   </div>
                 </div>
 

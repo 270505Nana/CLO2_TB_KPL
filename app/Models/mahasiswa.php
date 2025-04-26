@@ -16,6 +16,7 @@ class mahasiswa extends Model
         'angkatan',
         'nomor_hp',
     ];
+    
     public function peminjaman()
     {
         return $this->hasMany(Peminjaman::class, 'nim', 'nim');

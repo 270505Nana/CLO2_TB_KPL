@@ -4,8 +4,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="apple-touch-icon" sizes="76x76" href={{ asset('assets/img/brain.png') }}">
-  <link rel="icon" type="image/png" href="{{ asset('assets/img/brain.png') }}">
+  <link rel="apple-touch-icon" sizes="76x76" href={{ asset('assets/img/brain.png') }}>
+  <link rel="icon" type="image/png" href= {{ asset('assets/img/brain.png') }}>
   <title>
     Manajemen Perpustakaan
   </title>
@@ -27,7 +27,7 @@
       <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
       <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/argon-dashboard/pages/dashboard.html " target="_blank">
 
-        <img src="{{ asset('assets/img/brain-bg.png') }}" width="35px" height="35px" class="navbar-brand-img h-100" alt="main_logo">
+        <img src={{ asset('assets/img/brain-bg.png') }} width="35px" height="35px" class="navbar-brand-img h-100" alt="main_logo">
         <span class="ms-1 font-weight-bold">Manajemen Perpustakaan</span>
       </a>
     </div>
@@ -147,63 +147,82 @@
               {{-- klo masih bingung bisa usaha chat gpt aja dulu, nnti klo udah paham sma udh ketemu baru chat grup --}}
               <div class="d-flex align-items-center">
                 {{-- <p class="mb-0">Edit Profile</p> --}}
-                <button class="btn btn-success btn-sm ms-auto">Tambah Data Mahasiswa</button>
+                <button type="submit"  form="form-mahasiswa"  class="btn btn-success btn-sm ms-auto">Tambah Data Mahasiswa</button>
               </div>
             </div>
 
             {{--CARD FORM  --}}
-            <div class="card-body">
-              <div class="row">
-                {{-- formmm, nnti diganti jadi post formnya! jgn lupa ya guys --}}
-                <div class="col-md-15">
+            <form id="form-mahasiswa" action="{{ route('mahasiswa.store') }}" method="POST">
+              @csrf
+              <div class="card-body">
+                <div class="row">
+                  {{-- formmm, nnti diganti jadi post formnya! jgn lupa ya guys --}}
+                  <div class="col-md-15">
 
-                  {{-- form judul --}}
-                  <div class="form-group">
-                    <label for="example-text-input" class="form-control-label">Nama mahasiswa</label>
-                    <input class="form-control" type="text" name = "nama" placeholder="Masukkan Nama Mahasiswa" id="nama" required>
+                    {{-- form judul --}}
+                    <div class="form-group">
+                      <label for="example-text-input" class="form-control-label">Nama mahasiswa</label>
+                      <input class="form-control" type="text" name = "nama" placeholder="Masukkan Nama Mahasiswa" id="nama" required value="{{ old('nama') }}">
+
+                        @error('nama')
+                          <div class="alert alert-danger mt-1">{{ $message }}</div>
+                        @enderror
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="example-text-input" class="form-control-label">NIM Mahasiswa</label>
+                      {{-- nana : pastikan id sama nameharus sama kaya ditabel ya klo engga nnti dia ga kekirim ke db --}}
+                      <input class="form-control" type="number" name = "nim" placeholder="Masukkan NIM Mahasiswa" id = "nim" required value="{{ old('nim') }}">
+                      @error('nim')
+                        <div class="alert alert-danger mt-1">{{ $message }}</div>
+                      @enderror
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="example-text-input" class="form-control-label">Fakultas</label>
+                      <input type="text" name="fakultas" class="form-control" placeholder="Masukkan fakultas mahasiswa" required value="{{ old('fakultas') }}">
+                      @error('fakultas')
+                        <div class="alert alert-danger mt-1">{{ $message }}</div>
+                      @enderror
+                    </div>
+                  </div>
+                
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="example-text-input" class="form-control-label">Program Studi</label>
+                      <input type="text" name="prodi" class="form-control" placeholder="Masukkan program studi mahasiswa" required value="{{ old('prodi') }}">
+                      @error('prodi')
+                        <div class="alert alert-danger mt-1">{{ $message }}</div>
+                      @enderror
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="example-text-input" class="form-control-label">Angkatan/Tahun Masuk Mahasiswa</label>
+                      <input type="number" name="angkatan" class="form-control" placeholder="Masukkan tahun masuk mahasiswa" required value="{{ old('angkatan') }}">
+                      @error('angkatan')
+                        <div class="alert alert-danger mt-1">{{ $message }}</div>
+                      @enderror
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="example-text-input" class="form-control-label">Nomor Handphone Mahasiswa</label>
+                      <input type="number" name="nomor_hp" class="form-control" placeholder="Masukkan nomor telepon mahasiswa" required value="{{ old('nomor_hp') }}">
+                      @error('nomor_hp')
+                        <div class="alert alert-danger mt-1">{{ $message }}</div>
+                      @enderror
+                    </div>
                   </div>
                 </div>
-
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="example-text-input" class="form-control-label">NIM Mahasiswa</label>
-                    {{-- nana : pastikan id sama nameharus sama kaya ditabel ya klo engga nnti dia ga kekirim ke db --}}
-                    <input class="form-control" type="text" name = "nim" placeholder="Masukkan NIM Mahasiswa" id = "nim" required>
-                  </div>
-                </div>
-
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="example-text-input" class="form-control-label">Prodi</label>
-                    <input class="form-control" type="text" name = "prodi" placeholder="Masukkan Prodi Mahasiswa" id = "prodi" required>
-                  </div>
-                </div>
-
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="example-text-input" class="form-control-label">Fakultas</label>
-                    <input type="text" name="fakultas" class="form-control" placeholder="Masukkan Fakultas Mahasiswa" id = "fakultas" required>
-                  </div>
-                </div>
-
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="example-text-input" class="form-control-label">Angkatan/Tahun Masuk Mahasiswa</label>
-                    <input type="number" name="angkatan" class="form-control" placeholder="Masukkan tahun masuk mahasiswa" required>
-                  </div>
-                </div>
-
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="example-text-input" class="form-control-label">Nomor Handphone Mahasiswa</label>
-                    <input type="number" name="nomor_hp" class="form-control" placeholder="Masukkan nomor telepon mahasiswa" required>
-                  </div>
-                </div>
-
               </div>
-              {{-- garis pembatas ya ges ya jangan dihapus --}}
-              {{-- <hr class="horizontal dark"> --}}
-            </div>
+            </form>
           </div>
         </div>
         <div class="col-md-4">
@@ -268,10 +287,10 @@
     </div>
   </div>
   <!--   Core JS Files   -->
-  <script src="../assets/js/core/popper.min.js"></script>
-  <script src="../assets/js/core/bootstrap.min.js"></script>
-  <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
-  <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
+  <script src={{ asset('assets/js/core/popper.min.js') }}></script>
+  <script src={{ asset('assets/js/core/bootstrap.min.js') }}></script>
+  <script src={{ asset('assets/js/plugins/perfect-scrollbar.min.js') }}></script>
+  <script src={{ asset('assets/js/plugins/smooth-scrollbar.min.js') }}></script>
   <script>
     var win = navigator.platform.indexOf('Win') > -1;
     if (win && document.querySelector('#sidenav-scrollbar')) {
@@ -284,7 +303,9 @@
   <!-- Github buttons -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-  <script src="../assets/js/argon-dashboard.min.js?v=2.1.0"></script>
+  <script src={{ asset('assets/js/argon-dashboard.min.js?v=2.1.0') }}></script>
+
+  
 </body>
 
 </html>

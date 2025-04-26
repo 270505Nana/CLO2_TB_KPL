@@ -138,22 +138,25 @@
                     </tr>
                   </thead>
                   <tbody class="table-group-divider ml-3">
+                    {{-- disesuaikan dengan yang di controller dll yang sudah disetting sblumnya --}}
+                    @foreach ($mahasiswas as $mhs)
                     <tr>
-                      <td class="text-start text-xs" >2311104016</td>
-                      <td class="text-start text-xs" >Prajna paramitha</td>
-                      <td class="text-start text-xs" >Otto</td>
-                      <td class="text-start text-xs" >Teknik</td>
-                      <td class="text-start text-xs" >2020</td>
-                      <td class="text-start text-xs" >08123456789</td>
+                      <td class="text-start text-xs">{{ $mhs->nim }}</td>
+                      <td class="text-start text-xs">{{ $mhs->prodi }}</td>
+                      <td class="text-start text-xs">{{ $mhs->nama }}</td>
+                      <td class="text-start text-xs">{{ $mhs->fakultas }}</td>
+                      <td class="text-start text-xs">{{ $mhs->angkatan }}</td>
+                      <td class="text-start text-xs">{{ $mhs->nomor_hp }}</td>
                       <td class="text-center">
-                        <a href="/editmahasiswa" class="text-secondary mx-2">
+                        <a href="/editmahasiswa/{{ $mhs->id }}" class="text-secondary mx-2">
                           <i class="ni ni-ruler-pencil text-lg" aria-hidden="true"></i>
                         </a>
-                        <a href="/deletemahasiswa" class="text-secondary mx-2">
+                        <a href="/deletemahasiswa/{{ $mhs->id }}" class="text-secondary mx-2" onclick="return confirm('Yakin mau hapus?')">
                           <i class="ni ni-fat-remove text-lg" aria-hidden="true"></i>
                         </a>
                       </td>
                     </tr>
+                    @endforeach
                   </tbody>
                 </table>
               </div>

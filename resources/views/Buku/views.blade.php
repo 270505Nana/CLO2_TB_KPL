@@ -149,9 +149,11 @@
                         <a href="/editbuku/{{ $buku->id }}" class="text-secondary font-weight-bold text-xs me-2" data-toggle="tooltip" title="Edit Buku">
                           <i class="ni ni-ruler-pencil text-lg opacity-10"></i>
                         </a>
-                        <a href="/hapusbuku/{{ $buku->id }}" class="text-danger font-weight-bold text-xs" data-toggle="tooltip" title="Hapus Buku" onclick="return confirm('Yakin ingin menghapus buku ini?')">
-                          <i class="ni ni-fat-remove text-lg"></i>
-                        </a>
+                        <button class="btn-delete text-secondary mx-2" 
+                          data-id="{{ $buku->id }}" 
+                          style="background: none; border: none; padding: 0; cursor: pointer;">
+                          <i class="ni ni-fat-remove text-lg" aria-hidden="true"></i>
+                      </button>
                       </td>
                     </tr>
                     @endforeach
@@ -172,8 +174,67 @@
         </div>
       </div>
     </div>
-
   </main>
+  <!-- Include SweetAlert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const deleteButtons = document.querySelectorAll('.btn-delete');
+
+    deleteButtons.forEach(button => {
+        button.addEventListener('click', function () {
+            const id = this.getAttribute('data-id');
+
+            Swal.fire({
+                title: 'Warning',
+                text: "Apakah Anda yakin ingin menghapus data buku ini?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Hapus'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    fetch(`/api/buku/delete/${id}`, {
+                        method: 'DELETE',
+                        headers: {
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                            'Accept': 'application/json'
+                        }
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.status === 'success') {
+                            Swal.fire(
+                                'Deleted!',
+                                data.messages,
+                                'success'
+                            ).then(() => {
+                                location.reload(); // Reload the page after deletion
+                            });
+                        } else {
+                            Swal.fire(
+                                'Error!',
+                                data.messages,
+                                'error'
+                            );
+                        }
+                    })
+                    .catch(error => {
+                        Swal.fire(
+                            'Error!',
+                            'Something went wrong!',
+                            'error'
+                        );
+                        console.error('Error:', error);
+                    });
+                }
+            });
+        });
+    });
+});
+</script>
 
 </body>
 </html>

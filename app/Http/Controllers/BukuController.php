@@ -11,9 +11,32 @@ class BukuController extends Controller
     // Function show untuk menampilkan semua buku
     public function show()
     {
-    $dataBuku = buku::all();
-    return view('buku.views', compact('dataBuku'));
+        try {
+            $dataBuku = Buku::all();
+
+            if ($dataBuku->isEmpty()) {
+                return response()->json([
+                    'code' => 404,
+                    'status' => 'empty',
+                    'message' => 'Tidak ada data buku tersedia.'
+                ], 404);
+            }
+
+            return response()->json([
+                'code' => 200,
+                'status' => 'success',
+                'data' => $dataBuku
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'code' => 500,
+                'status' => 'error',
+                'message' => 'Gagal mengambil data buku.',
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
+
 
     // Function store untuk menyimpan data buku baru
     public function store(Request $request)
@@ -35,5 +58,25 @@ class BukuController extends Controller
         ]);
 
         return redirect()->back()->with('success', 'Data Buku Berhasil Disimpan!');
+    }
+
+    public function destroy($id)
+    {
+        try {
+            $buku = buku::findOrFail($id);
+            $buku->delete();
+    
+            return response()->json([
+                'code' => 200,
+                'status' => 'success',
+                'messages' => 'Data Buku Berhasil Dihapus!'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'code' => 404,
+                'status' => 'error',
+                'messages' => 'Data Buku tidak ditemukan!'
+            ], 404);
+        }
     }
 }

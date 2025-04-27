@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\BukuController;
+use App\Http\Controllers\PeminjamanController;
 
 
 Route::get('/user', function (Request $request) {
@@ -22,4 +23,9 @@ Route::prefix('buku')->group(function () {
     Route::get('/',[BukuController::class, 'show'])->name('buku.index');
     Route::post('/',[BukuController::class, 'store'])->name('buku.store');
     Route::delete('/delete/{id}', [BukuController::class, 'destroy'])->name('buku.destroy');
+});
+
+// API UNTUK DATA PEMINJAMAN
+Route::prefix('peminjaman')->group(function () {
+    Route::delete('/delete/{id}', [PeminjamanController::class, 'destroy'])->name('peminjaman.destroy');
 });

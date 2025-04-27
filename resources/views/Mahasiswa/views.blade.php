@@ -296,7 +296,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                 data.messages,
                                 'success'
                             ).then(() => {
-                                location.reload(); // Reload the page after deletion
+                                location.reload(); 
                             });
                         } else {
                             Swal.fire(

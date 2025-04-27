@@ -132,9 +132,12 @@
                         <a href="/editpeminjaman/{{ $peminjaman->id_buku }}" class="text-secondary mx-2">
                           <i class="ni ni-ruler-pencil text-lg" aria-hidden="true"></i>
                         </a>
-                        <a href="/deletepeminjaman/{{ $peminjaman->id_buku }}" class="text-secondary mx-2" onclick="return confirm('Yakin mau hapus?')">
-                          <i class="ni ni-fat-remove text-lg" aria-hidden="true"></i>
-                        </a>
+                     
+                        <button class="btn-delete text-danger mx-2" 
+                                data-id="{{ $peminjaman->id }}" 
+                                style="background: none; border: none; padding: 0; cursor: pointer;">
+                            <i class="ni ni-fat-remove text-lg" aria-hidden="true"></i>
+                        </button>
                       </td>
                     </tr>
                     @endforeach
@@ -162,6 +165,59 @@
     }
   </script>
   <script src="../assets/js/argon-dashboard.min.js?v=2.1.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const deleteButtons = document.querySelectorAll('.btn-delete');
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const id = this.getAttribute('data-id');
+
+                Swal.fire({
+                    title: 'Warning',
+                    text: "Apakah Anda yakin ingin menghapus data peminjaman ini?",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Hapus'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                      fetch(`/api/peminjaman/delete/${id}`, {
+                            method: 'DELETE',
+                            headers: {
+                                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                                'Accept': 'application/json'
+                            }
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.status === 'success') {
+                                Swal.fire(
+                                    'Deleted!',
+                                    data.messages,
+                                    'success'
+                                ).then(() => {
+                                    location.reload();
+                                });
+                            } else {
+                                Swal.fire(
+                                    'Error!',
+                                    data.messages,
+                                    'error'
+                                );
+                            }
+                        })
+                        .catch(error => {
+                            Swal.fire('Error!', 'Terjadi kesalahan saat menghubungi server.', 'error');
+                            console.error('Error:', error);
+                        });
+                    }
+                });
+            });
+        });
+    });
+</script>
 </body>
 
 </html>

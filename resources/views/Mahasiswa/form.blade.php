@@ -326,7 +326,7 @@ document.getElementById('form-mahasiswa').addEventListener('submit', async funct
 
     if (response.ok) {
       alert('Data mahasiswa berhasil ditambahkan!');
-      window.location.href = '/datamahasiswa'; //NAMBAHIN INIII
+      window.location.href = '/datamahasiswa'; 
     } else {
       alert('Gagal menambahkan data: ' + (result.message || 'Unknown error'));
     }

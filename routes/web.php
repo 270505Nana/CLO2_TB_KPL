@@ -14,16 +14,16 @@ Route::get('/login', function () {
 });
 
 // =========================== BUKU ========================================================
+
 // Menampilkan seluruh data buku
-Route::get('/databuku', [BukuController::class, 'show'])->name('buku.show');
+Route::get('/databuku', function () {
+    return view('buku.views'); 
+});
 
 // Menampilkan form tambah buku
 Route::get('/tambahdatabuku', function () {
-    return view('buku/form'); // Form tambah buku
+    return view('buku.form');
 });
-
-// Menyimpan data buku
-Route::post('/buku/store', [BukuController::class, 'store'])->name('buku.store');
 
 
 

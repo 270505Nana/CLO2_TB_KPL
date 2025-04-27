@@ -127,43 +127,12 @@
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Aksi</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    @foreach ($dataBuku as $buku)
-                    <tr>
-                      <td>
-                        <div class="d-flex px-2 py-1">
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">{{ $buku->judul }}</h6>
-                          </div>
-                        </div>
-                      </td>
-                      <td><p class="text-xs font-weight-bold mb-0">{{ $buku->penulis }}</p></td>
-                      <td><p class="text-xs font-weight-bold mb-0">{{ $buku->penerbit }}</p></td>
-                      <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">{{ $buku->tahun_terbit }}</span>
-                      </td>
-                      <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">{{ $buku->genre }}</span>
-                      </td>
-                      <td class="align-middle text-center">
-                        <a href="/editbuku/{{ $buku->id }}" class="text-secondary font-weight-bold text-xs me-2" data-toggle="tooltip" title="Edit Buku">
-                          <i class="ni ni-ruler-pencil text-lg opacity-10"></i>
-                        </a>
-                        <a href="/hapusbuku/{{ $buku->id }}" class="text-danger font-weight-bold text-xs" data-toggle="tooltip" title="Hapus Buku" onclick="return confirm('Yakin ingin menghapus buku ini?')">
-                          <i class="ni ni-fat-remove text-lg"></i>
-                        </a>
-                      </td>
-                    </tr>
-                    @endforeach
+                  <tbody id="dataBuku">
+
                   </tbody>
                 </table>
 
-                {{-- Kalau data kosong --}}
-                @if ($dataBuku->isEmpty())
-                  <div class="text-center my-4">
-                    <p class="text-secondary">Tidak ada data buku.</p>
-                  </div>
-                @endif
+      
 
               </div>
             </div>
@@ -172,8 +141,103 @@
         </div>
       </div>
     </div>
-
   </main>
+  <!-- Include SweetAlert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    // buat megambil data buku
+    fetch('/api/buku')
+    .then(response => response.json())
+    .then(data => {
+        const tableBody = document.querySelector('tbody');
+        tableBody.innerHTML = '';
+
+        if (data.data.length > 0) {
+            data.data.forEach(buku => {
+                const tr = document.createElement('tr');
+
+                tr.innerHTML = `
+                    <td><h6 class="mb-0 text-sm">${buku.judul}</h6></td>
+                    <td><p class="text-xs font-weight-bold mb-0">${buku.penulis}</p></td>
+                    <td><p class="text-xs font-weight-bold mb-0">${buku.penerbit}</p></td>
+                    <td class="align-middle text-center">
+                        <span class="text-secondary text-xs font-weight-bold">${buku.tahun_terbit}</span>
+                    </td>
+                    <td class="align-middle text-center">
+                        <span class="text-secondary text-xs font-weight-bold">${buku.genre}</span>
+                    </td>
+                    <td class="align-middle text-center">
+                        <a href="/editbuku/${buku.id}" class="text-secondary font-weight-bold text-xs me-2" data-toggle="tooltip" title="Edit Buku">
+                          <i class="ni ni-ruler-pencil text-lg opacity-10"></i>
+                        </a>
+                        <button class="btn-delete text-secondary mx-2" 
+                          data-id="${buku.id}" 
+                          style="background: none; border: none; padding: 0; cursor: pointer;">
+                          <i class="ni ni-fat-remove text-lg" aria-hidden="true"></i>
+                        </button>
+                    </td>
+                `;
+
+                tableBody.appendChild(tr);
+            });
+
+            // button buat delete buku
+            const deleteButtons = document.querySelectorAll('.btn-delete');
+            deleteButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    const id = this.getAttribute('data-id');
+
+                    Swal.fire({
+                        title: 'Warning',
+                        text: "Apakah Anda yakin ingin menghapus data buku ini?",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Hapus'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            fetch(`/api/buku/delete/${id}`, {
+                                method: 'DELETE',
+                                headers: {
+                                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                                    'Accept': 'application/json'
+                                }
+                            })
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data.status === 'success') {
+                                    Swal.fire('Deleted!', data.messages, 'success').then(() => {
+                                        location.reload();
+                                    });
+                                } else {
+                                    Swal.fire('Error!', data.messages, 'error');
+                                }
+                            })
+                            .catch(error => {
+                                Swal.fire('Error!', 'Something went wrong!', 'error');
+                                console.error('Error:', error);
+                            });
+                        }
+                    });
+                });
+            });
+        } else {
+            tableBody.innerHTML = `
+                <tr>
+                    <td colspan="6" class="text-center text-secondary">Tidak ada data buku.</td>
+                </tr>
+            `;
+        }
+    })
+    .catch(error => {
+        console.error('Error fetching data:', error);
+    });
+});
+
+</script>
 
 </body>
 </html>

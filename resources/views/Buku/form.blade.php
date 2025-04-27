@@ -153,59 +153,51 @@
               {{-- button juga pake tipe yang post ya, buat ngirim data. --}}
               {{-- klo masih bingung bisa usaha chat gpt aja dulu, nnti klo udah paham sma udh ketemu baru chat grup --}}
               <div class="d-flex align-items-center">
-                {{-- <p class="mb-0">Edit Profile</p> --}}
-                <button type="submit" form="form-buku" class="btn btn-success btn-sm ms-auto">Tambah Buku</button>
+                  <button type="submit" form="form-buku" class="btn btn-success btn-sm ms-auto">Simpan Buku</button>
               </div>
             </div>
 
             {{--CARD FORM  --}}
-            <form id="form-buku" action="{{ route('buku.store') }}" method="POST">
-            @csrf
+            <form id="form-buku" method="POST" action="/api/buku">
             <div class="card-body">
-              <div class="row">
-                {{-- formmm, nnti diganti jadi post formnya! jgn lupa ya guys --}}
-                <div class="col-md-15">
+                <div class="row">
+                  <div class="col-md-15">
+                    <div class="form-group">
+                      <label for="judul" class="form-control-label">Judul Buku</label>
+                      <input class="form-control" type="text" name="judul" placeholder="Masukkan Judul Buku" id="judul" required>
+                    </div>
+                  </div>
 
-                  {{-- form judul --}}
-                  <div class="form-group">
-                    <label for="example-text-input" class="form-control-label">Judul Buku</label>
-                    <input class="form-control" type="text" name = "judul" placeholder="Masukkan Judul Buku" id="judul" required>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="penulis" class="form-control-label">Penulis Buku</label>
+                      <input class="form-control" type="text" name="penulis" placeholder="Masukkan Penulis Buku" id="penulis" required>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="penerbit" class="form-control-label">Penerbit</label>
+                      <input class="form-control" type="text" name="penerbit" placeholder="Masukkan Penerbit Buku" id="penerbit" required>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="tahun_terbit" class="form-control-label">Tahun Terbit</label>
+                      <input type="number" name="tahun_terbit" min="1900" max="2099" step="1" class="form-control" placeholder="Masukkan tahun terbit" required>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="genre" class="form-control-label">Genre Buku</label>
+                      <input type="text" name="genre" class="form-control" placeholder="Masukkan genre buku" required>
+                    </div>
                   </div>
                 </div>
-
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="example-text-input" class="form-control-label">Penulis Buku</label>
-                    {{-- nana : pastikan id sama nameharus sama kaya ditabel ya klo engga nnti dia ga kekirim ke db --}}
-                    <input class="form-control" type="text" name = "penulis" placeholder="Masukkan Penulis Buku" id = "penulis" required>
-                  </div>
-                </div>
-
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="example-text-input" class="form-control-label">Penerbit</label>
-                    <input class="form-control" type="text" name = "penerbit" placeholder="Masukkan Penerbit" id = "penerbit" required>
-                  </div>
-                </div>
-
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="example-text-input" class="form-control-label">Tahun Terbit</label>
-                    <input type="number" name="tahun_terbit" min="1900" max="2099" step="1" class="form-control" placeholder="Masukkan tahun terbit" required>
-                  </div>
-                </div>
-
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="example-text-input" class="form-control-label">Genre Buku</label>
-                    <input type="text" name="genre" class="form-control" placeholder="Masukkan genre buku" required>
-                  </div>
-                </div>
-
               </div>
-              {{-- garis pembatas ya ges ya jangan dihapus --}}
-              {{-- <hr class="horizontal dark"> --}}
-            </div>
+            </form>
           </div>
         </div>
         <div class="col-md-4">
@@ -287,6 +279,38 @@
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="../assets/js/argon-dashboard.min.js?v=2.1.0"></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const submitButton = document.querySelector("button[type='submit'][form='form-buku']");
+    const formBuku = document.getElementById("form-buku");
+
+    submitButton.addEventListener("click", function(event) {
+      event.preventDefault(); 
+
+      const formData = new FormData(formBuku);
+
+      fetch(formBuku.action, {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.status === 'success') {
+          alert('Buku berhasil ditambahkan!');
+          window.location.href = '/databuku'; 
+        } else {
+          alert('Gagal menambahkan buku: ' + data.message);
+        }
+      })
+      .catch(error => {
+        console.error('Terjadi kesalahan:', error);
+        alert('Terjadi kesalahan. Silakan coba lagi.');
+      });
+    });
+  });
+</script>
+
+
 </body>
 
 </html>

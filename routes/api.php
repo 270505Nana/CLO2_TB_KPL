@@ -12,7 +12,9 @@ Route::get('/user', function (Request $request) {
 
 // API UNTUK DATA MAHASISWA
 Route::prefix('mahasiswa')->group(function () {
+    Route::post('/',[MahasiswaController::class, 'store'])->name('mahasiswa.store');
     Route::delete('/delete/{nim}', [MahasiswaController::class, 'destroy'])->name('mahasiswa.destroy');
+
 });
 
 // API UNTUK DATA BUKU

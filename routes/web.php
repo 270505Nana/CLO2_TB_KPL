@@ -32,10 +32,9 @@ Route::get('/tambahdatabuku', function () {
 // Mengarahkan ke mahasiswa controller dengan method show
 Route::get('/datamahasiswa', [MahasiswaController::class, 'show'])->name('mahasiswa.show');
 Route::get('/tambahdatamahasiswa', function () {
-    return view('mahasiswa/form');
+    return view('mahasiswa.form');
 });
 
-Route::post('/mahasiswa/store', [MahasiswaController::class, 'store'])->name('mahasiswa.store');
 // post : mengirim data
 // store : manggil dari controller
 // terus ini itu simplenya sebut aja url nya buat routes /mahasiswa/routes artinya baris dibawah ini

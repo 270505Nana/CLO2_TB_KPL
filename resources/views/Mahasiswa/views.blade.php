@@ -28,60 +28,55 @@
     <div class="sidenav-header">
       <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
       <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/argon-dashboard/pages/dashboard.html " target="_blank">
-        <img src="{{ asset('assets/img/brain-bg.png') }}" width="35px" height="35px" class="navbar-brand-img h-100" alt="main_logo">
-        <span class="ms-1 font-weight-bold">Manajemen Perpustakaan</span>
+        <img src="{{ asset('assets/img/brain-bg.png') }}" width="25px" height="25px" class="navbar-brand-img h-100" alt="main_logo">
+        <span class="ms-0 font-weight">Manajemen Perpustakaan</span>
       </a>
     </div>
     <hr class="horizontal dark mt-0">
 
     {{-- NAVBAR --}}
     {{-- navbar nnti dibikin full --}}
-    <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
+    <div class="collapse navbar-collapse w-auto" id="sidenav-collapse-main">
       <ul class="navbar-nav">
-
-        {{-- list navbar item --}}
         <li class="nav-item">
-          <a class="nav-link active" href="/">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+          <a class="nav-link" href="/">
+            <div class="icon icon-shape icon-sm text-center me-2 d-flex align-items-center justify-content-center">
               <i class="ni ni-tv-2 text-dark text-sm opacity-10"></i>
             </div>
             <span class="nav-link-text ms-1">Dashboard</span>
           </a>
         </li>
-
         <li class="nav-item">
-          {{-- HREF DIUBAH! --}}
-          <a class="nav-link " href="/databuku">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-credit-card text-dark text-sm opacity-10"></i>
+          <a class="nav-link" href="/databuku">
+            <div class="icon icon-shape icon-sm text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="ni ni-books text-dark text-sm opacity-10"></i>
             </div>
             <span class="nav-link-text ms-1">Data Buku</span>
           </a>
         </li>
-
         <li class="nav-item">
-          <a class="nav-link " href="/datamahasiswa">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-credit-card text-dark text-sm opacity-10"></i>
+          <a class="nav-link active" href="/datamahasiswa">
+            <div class="icon icon-shape icon-sm text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="ni ni-hat-3 text-dark text-sm opacity-10"></i>
             </div>
             <span class="nav-link-text ms-1">Data Mahasiswa</span>
           </a>
         </li>
-
         <li class="nav-item">
-          <a class="nav-link " href="/datapeminjaman">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-app text-dark text-sm opacity-10"></i>
+          <a class="nav-link" href="/datapeminjaman">
+            <div class="icon icon-shape icon-sm text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="ni ni-basket text-dark text-sm opacity-10"></i>
             </div>
             <span class="nav-link-text ms-1">Data Peminjaman</span>
           </a>
         </li>
+      </ul>
     </div>
   </aside>
 
   <main class="main-content position-relative border-radius-lg ">
     <!-- Navbar atas pencarian & sign in serta nama page-->
-    <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl " id="navbarBlur" data-scroll="false">
+    <nav class="navbar navbar-main navbar-expand-lg px-0 mx-0 shadow-none border-radius-xl " id="navbarBlur" data-scroll="false">
       <div class="container-fluid py-1 px-3">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
@@ -118,9 +113,9 @@
           <div class="card mb-4">
 
             {{-- CARD ATAS --}}
-            <div class="card-header pb-0">
-              <h6>Tabel Data Mahasiswa</h6>
-              <a class="btn btn-success btn-sm ms-auto" href="/tambahdatamahasiswa">Tambah Data Mahasiswa</a>
+            <div class="card-header pb-0 d-flex justify-content-between">
+              <h6>Tabel Mahasiswa</h6>
+              <a class="btn btn-success btn-sm" href="/tambahdatabuku">Tambah Mahasiswa</a>
             </div>
 
             <div class="card-body px-0 pt-0 pb-2">
@@ -141,17 +136,17 @@
                     {{-- disesuaikan dengan yang di controller dll yang sudah disetting sblumnya --}}
                     @foreach ($mahasiswas as $mhs)
                     <tr>
-                      <td class="text-start text-xs">{{ $mhs->nim }}</td>
-                      <td class="text-start text-xs">{{ $mhs->prodi }}</td>
-                      <td class="text-start text-xs">{{ $mhs->nama }}</td>
-                      <td class="text-start text-xs">{{ $mhs->fakultas }}</td>
-                      <td class="text-start text-xs">{{ $mhs->angkatan }}</td>
-                      <td class="text-start text-xs">{{ $mhs->nomor_hp }}</td>
-                      <td class="text-center">
+                      <td class="align-middle"><p class="text-xs font-weight-bold mb-0 ps-3">{{ $mhs->nim }}</td>
+                      <td class="align-middle"><p class="text-xs font-weight-bold mb-0 ps-3">{{ $mhs->prodi }}</p></td>
+                      <td class="align-middle"><p class="text-xs font-weight-bold mb-0 ps-3">{{ $mhs->nama }}</td>
+                      <td class="align-middle"><p class="text-xs font-weight-bold mb-0 ps-3">{{ $mhs->fakultas }}</td>
+                      <td class="align-middle"><p class="text-xs font-weight-bold mb-0 ps-3">{{ $mhs->angkatan }}</td>
+                      <td class="align-middle"><p class="text-xs font-weight-bold mb-0 ps-3">{{ $mhs->nomor_hp }}</td>
+                      <td class="align-middle">
                         <a href="/editmahasiswa/{{ $mhs->id }}" class="text-secondary mx-2">
                           <i class="ni ni-ruler-pencil text-lg" aria-hidden="true"></i>
                         </a>
-                        <button class="btn-delete text-secondary mx-2" 
+                        <button class="btn-delete text-secondary mx-1" 
                           data-nim="{{ $mhs->nim }}" 
                           style="background: none; border: none; padding: 0; cursor: pointer;">
                           <i class="ni ni-fat-remove text-lg" aria-hidden="true"></i>

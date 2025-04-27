@@ -28,56 +28,54 @@
     <div class="sidenav-header">
       <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
       <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/argon-dashboard/pages/dashboard.html " target="_blank">
-        <img src="{{ asset('assets/img/brain-bg.png') }}" width="35px" height="35px" class="navbar-brand-img h-100" alt="main_logo">
-        <span class="ms-1 font-weight-bold">Manajemen Perpustakaan</span>
+        <img src="{{ asset('assets/img/brain-bg.png') }}" width="25px" height="25px" class="navbar-brand-img h-100" alt="main_logo">
+        <span class="ms-0 font-weight">Manajemen Perpustakaan</span>
       </a>
     </div>
     <hr class="horizontal dark mt-0">
 
     {{-- NAVBAR --}}
-    <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
+    <div class="collapse navbar-collapse w-auto" id="sidenav-collapse-main">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link active" href="/">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+          <a class="nav-link" href="/">
+            <div class="icon icon-shape icon-sm text-center me-2 d-flex align-items-center justify-content-center">
               <i class="ni ni-tv-2 text-dark text-sm opacity-10"></i>
             </div>
             <span class="nav-link-text ms-1">Dashboard</span>
           </a>
         </li>
-
         <li class="nav-item">
-          <a class="nav-link " href="/databuku">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-credit-card text-dark text-sm opacity-10"></i>
+          <a class="nav-link" href="/databuku">
+            <div class="icon icon-shape icon-sm text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="ni ni-books text-dark text-sm opacity-10"></i>
             </div>
             <span class="nav-link-text ms-1">Data Buku</span>
           </a>
         </li>
-
         <li class="nav-item">
-          <a class="nav-link " href="/datamahasiswa">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-credit-card text-dark text-sm opacity-10"></i>
+          <a class="nav-link" href="/datamahasiswa">
+            <div class="icon icon-shape icon-sm text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="ni ni-hat-3 text-dark text-sm opacity-10"></i>
             </div>
             <span class="nav-link-text ms-1">Data Mahasiswa</span>
           </a>
         </li>
-
         <li class="nav-item">
-          <a class="nav-link " href="/datapeminjaman">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-app text-dark text-sm opacity-10"></i>
+          <a class="nav-link active" href="/datapeminjaman">
+            <div class="icon icon-shape icon-sm text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="ni ni-basket text-dark text-sm opacity-10"></i>
             </div>
             <span class="nav-link-text ms-1">Data Peminjaman</span>
           </a>
         </li>
+      </ul>
     </div>
   </aside>
 
   <main class="main-content position-relative border-radius-lg ">
     <!-- Navbar atas pencarian & sign in serta nama page-->
-    <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl " id="navbarBlur" data-scroll="false">
+    <nav class="navbar navbar-main navbar-expand-lg px-0 mx-0 shadow-none border-radius-xl " id="navbarBlur" data-scroll="false">
       <div class="container-fluid py-1 px-3">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
@@ -112,23 +110,23 @@
                 <table class="table table-hover align-items-center mb-0">
                   <thead>
                     <tr>
-                      <th scope="col" class="text-secondary text-xxs font-weight-bolder opacity-7">ID Buku</th>
-                      <th scope="col" class="text-secondary text-xxs font-weight-bolder opacity-7">Nama Mahasiswa</th>
-                      <th scope="col" class="text-secondary text-xxs font-weight-bolder opacity-7">Judul Buku</th>
-                      <th scope="col" class="text-secondary text-xxs font-weight-bolder opacity-7">Tanggal Pinjam</th>
-                      <th scope="col" class="text-secondary text-xxs font-weight-bolder opacity-7">Tanggal Kembali</th>
-                      <th scope="col" class="text-secondary text-xxs font-weight-bolder opacity-7">Aksi</th>
+                      <th scope="col" class="text-secondary text-xxs font-weight-bolder opacity-7" >ID Buku</th>
+                      <th scope="col" class="text-secondary text-xxs font-weight-bolder opacity-7" >Nama Mahasiswa</th>
+                      <th scope="col" class="text-secondary text-xxs font-weight-bolder opacity-7" >Judul Buku</th>
+                      <th scope="col" class="text-secondary text-xxs font-weight-bolder opacity-7" >Tanggal Pinjam</th>
+                      <th scope="col" class="text-secondary text-xxs font-weight-bolder opacity-7" >Tanggal Kembali</th>
+                      <th scope="col" class="text-secondary text-xxs font-weight-bolder opacity-7" >Aksi</th>
                     </tr>
                   </thead>
                   <tbody class="table-group-divider">
                     @foreach ($peminjamans as $peminjaman)
                     <tr>
-                      <td class="text-start text-xs">{{ $peminjaman->id_buku }}</td>
-                      <td class="text-start text-xs">{{ $peminjaman->mahasiswa->nama }}</td>
-                      <td class="text-start text-xs">{{ $peminjaman->buku->judul }}</td>
-                      <td class="text-start text-xs">{{ $peminjaman->tanggal_pinjam }}</td>
-                      <td class="text-start text-xs">{{ $peminjaman->tanggal_kembali }}</td>
-                      <td class="text-center">
+                      <td class="align-middle"><p class="text-xs font-weight-bold mb-0 ps-3">{{ $peminjaman->id_buku }}</p></td>
+                      <td class="align-middle"><p class="text-xs font-weight-bold mb-0 ps-3">{{ $peminjaman->mahasiswa->nama }}</p></td>
+                      <td class="align-middle"><p class="text-xs font-weight-bold mb-0 ps-3">{{ $peminjaman->buku->judul }}</p></td>
+                      <td class="align-middle"><p class="text-xs font-weight-bold mb-0 ps-3">{{ $peminjaman->tanggal_pinjam }}</p></td>
+                      <td class="align-middle"><p class="text-xs font-weight-bold mb-0 ps-3">{{ $peminjaman->tanggal_kembali }}</p></td>
+                      <td class="align-middle">
                         <a href="/editpeminjaman/{{ $peminjaman->id_buku }}" class="text-secondary mx-2">
                           <i class="ni ni-ruler-pencil text-lg" aria-hidden="true"></i>
                         </a>

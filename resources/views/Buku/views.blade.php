@@ -26,9 +26,9 @@
   <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4" id="sidenav-main">
     <div class="sidenav-header">
       <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" id="iconSidenav"></i>
-      <a class="navbar-brand m-0" href="#">
-        <img src="{{ asset('assets/img/brain-bg.png') }}" width="35px" height="35px" class="navbar-brand-img h-100" alt="main_logo">
-        <span class="ms-1 font-weight-bold">Manajemen Perpustakaan</span>
+      <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/argon-dashboard/pages/dashboard.html " target="_blank">
+        <img src="{{ asset('assets/img/brain-bg.png') }}" width="25px" height="25px" class="navbar-brand-img h-100" alt="main_logo">
+        <span class="ms-0 font-weight">Manajemen Perpustakaan</span>
       </a>
     </div>
     <hr class="horizontal dark mt-0">
@@ -36,7 +36,7 @@
     <div class="collapse navbar-collapse w-auto" id="sidenav-collapse-main">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link active" href="/">
+          <a class="nav-link" href="/">
             <div class="icon icon-shape icon-sm text-center me-2 d-flex align-items-center justify-content-center">
               <i class="ni ni-tv-2 text-dark text-sm opacity-10"></i>
             </div>
@@ -44,7 +44,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/databuku">
+          <a class="nav-link active" href="/databuku">
             <div class="icon icon-shape icon-sm text-center me-2 d-flex align-items-center justify-content-center">
               <i class="ni ni-books text-dark text-sm opacity-10"></i>
             </div>
@@ -74,7 +74,7 @@
   {{-- Main Content --}}
   <main class="main-content position-relative border-radius-lg">
     {{-- Navbar --}}
-    <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" data-scroll="false">
+    <nav class="navbar navbar-main navbar-expand-lg px-0 mx-0 shadow-none border-radius-xl" id="navbarBlur" data-scroll="false">
       <div class="container-fluid py-1 px-3">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
@@ -120,11 +120,11 @@
                   <thead>
                     <tr>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Judul Buku</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Penulis</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Penerbit</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tahun Terbit</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Genre</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Aksi</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Penulis</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Penerbit</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tahun Terbit</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Genre</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Aksi</th>
                     </tr>
                   </thead>
                   <tbody id="dataBuku">
@@ -159,17 +159,13 @@ document.addEventListener('DOMContentLoaded', function () {
                 const tr = document.createElement('tr');
 
                 tr.innerHTML = `
-                    <td><h6 class="mb-0 text-sm">${buku.judul}</h6></td>
-                    <td><p class="text-xs font-weight-bold mb-0">${buku.penulis}</p></td>
-                    <td><p class="text-xs font-weight-bold mb-0">${buku.penerbit}</p></td>
-                    <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">${buku.tahun_terbit}</span>
-                    </td>
-                    <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">${buku.genre}</span>
-                    </td>
-                    <td class="align-middle text-center">
-                        <a href="/editbuku/${buku.id}" class="text-secondary font-weight-bold text-xs me-2" data-toggle="tooltip" title="Edit Buku">
+                    <td class="align-middle"><p class="text-xs font-weight-bold mb-0 ps-3">${buku.judul}</p></td>
+                    <td class="align-middle"><p class="text-xs font-weight-bold mb-0 ps-3">${buku.penulis}</p></td>
+                    <td class="align-middle"><p class="text-xs font-weight-bold mb-0 ps-3">${buku.penerbit}</p></td>
+                    <td class="align-middle"><p class="text-xs font-weight-bold mb-0 ps-3">${buku.tahun_terbit}</p></td>
+                    <td class="align-middle"><p class="text-xs font-weight-bold mb-0 ps-3">${buku.genre}</p></td>
+                    <td class="align-middle mb-0 ps-3">
+                        <a href="/editbuku/${buku.id}" class="text-secondary font-weight-bold text-xs me-0" data-toggle="tooltip" title="Edit Buku">
                           <i class="ni ni-ruler-pencil text-lg opacity-10"></i>
                         </a>
                         <button class="btn-delete text-secondary mx-2" 

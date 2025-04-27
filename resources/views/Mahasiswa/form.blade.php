@@ -306,6 +306,37 @@
   <script src={{ asset('assets/js/argon-dashboard.min.js?v=2.1.0') }}></script>
 
   
+  <script>
+document.getElementById('form-mahasiswa').addEventListener('submit', async function(e) {
+  e.preventDefault(); // Supaya form tidak reload page
+
+  const formData = new FormData(this);
+
+  try {
+    const response = await fetch('/api/mahasiswa', { 
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'X-CSRF-TOKEN': '{{ csrf_token() }}' 
+      },
+      body: formData
+    });
+
+    const result = await response.json();
+
+    if (response.ok) {
+      alert('Data mahasiswa berhasil ditambahkan!');
+      window.location.href = '/datamahasiswa'; //NAMBAHIN INIII
+    } else {
+      alert('Gagal menambahkan data: ' + (result.message || 'Unknown error'));
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    alert('Terjadi kesalahan jaringan');
+  }
+});
+</script>
+
 </body>
 
 </html>

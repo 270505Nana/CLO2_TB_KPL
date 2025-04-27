@@ -60,7 +60,6 @@ class BukuController extends Controller
                 'genre' => $request->genre,
             ]);
     
-
             return response()->json([
                 'status' => 'success',
                 'code' => 200,

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MahasiswaController;
+use App\Http\Controllers\BukuController;
 
 Route::get('/', function () {
     return view('Dashboard');
@@ -11,13 +12,18 @@ Route::get('/login', function () {
     return view('Login');
 });
 
-Route::get('/databuku', function () {
-    return view('buku/views');
+// =========================== BUKU ========================================================
+// Menampilkan seluruh data buku
+Route::get('/databuku', [BukuController::class, 'show'])->name('buku.show');
+
+// Menampilkan form tambah buku
+Route::get('/tambahdatabuku', function () {
+    return view('buku/form'); // Form tambah buku
 });
 
-Route::get('/tambahdatabuku', function () {
-    return view('FormDataBuku');
-});
+// Menyimpan data buku
+Route::post('/buku/store', [BukuController::class, 'store'])->name('buku.store');
+
 
 
 // =========================== MAHASISWA ========================================================

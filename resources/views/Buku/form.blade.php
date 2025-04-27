@@ -154,11 +154,13 @@
               {{-- klo masih bingung bisa usaha chat gpt aja dulu, nnti klo udah paham sma udh ketemu baru chat grup --}}
               <div class="d-flex align-items-center">
                 {{-- <p class="mb-0">Edit Profile</p> --}}
-                <button class="btn btn-success btn-sm ms-auto">Tambah Buku</button>
+                <button type="submit" form="form-buku" class="btn btn-success btn-sm ms-auto">Tambah Buku</button>
               </div>
             </div>
 
             {{--CARD FORM  --}}
+            <form id="form-buku" action="{{ route('buku.store') }}" method="POST">
+            @csrf
             <div class="card-body">
               <div class="row">
                 {{-- formmm, nnti diganti jadi post formnya! jgn lupa ya guys --}}

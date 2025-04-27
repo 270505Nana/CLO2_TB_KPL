@@ -1,23 +1,24 @@
 <?php
 
-namespace App\Models;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+namespace App\Models; // Pastikan namespace ini sesuai
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class buku extends Model
+class Buku extends Model
 {
-    Use HasFactory;
+    use HasFactory;
+
     protected $fillable = [
         'judul',
         'penulis',
         'penerbit',
         'tahun_terbit',
-        'genre'
+        'genre',
     ];
 
-    public function peminjaman(){
-        return $this->hasOne(peminjaman::class);
-        // ibarat in one flight must has a many seats right? not only ine but more than one.
+    public function peminjaman()
+    {
+        return $this->hasMany(Peminjaman::class, 'id_buku');
     }
 }

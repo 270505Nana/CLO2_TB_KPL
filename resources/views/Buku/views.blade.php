@@ -84,7 +84,7 @@
           <h6 class="font-weight-bolder text-white mb-0">Data Buku</h6>
         </nav>
 
-        <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+        {{-- <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
           <div class="ms-md-auto pe-md-3 d-flex align-items-center">
             <div class="input-group">
               <span class="input-group-text text-body"><i class="fas fa-search"></i></span>
@@ -100,7 +100,8 @@
               </a>
             </li>
           </ul>
-        </div>
+
+        </div> --}}
       </div>
     </nav>
 
@@ -128,12 +129,8 @@
                     </tr>
                   </thead>
                   <tbody id="dataBuku">
-
                   </tbody>
                 </table>
-
-      
-
               </div>
             </div>
 
@@ -142,102 +139,104 @@
       </div>
     </div>
   </main>
+
   <!-- Include SweetAlert2 -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    // buat megambil data buku
-    fetch('/api/buku')
-    .then(response => response.json())
-    .then(data => {
-        const tableBody = document.querySelector('tbody');
-        tableBody.innerHTML = '';
-
-        if (data.data.length > 0) {
-            data.data.forEach(buku => {
-                const tr = document.createElement('tr');
-
-                tr.innerHTML = `
-                    <td><h6 class="mb-0 text-sm">${buku.judul}</h6></td>
-                    <td><p class="text-xs font-weight-bold mb-0">${buku.penulis}</p></td>
-                    <td><p class="text-xs font-weight-bold mb-0">${buku.penerbit}</p></td>
-                    <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">${buku.tahun_terbit}</span>
-                    </td>
-                    <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">${buku.genre}</span>
-                    </td>
-                    <td class="align-middle text-center">
-                        <a href="/editbuku/${buku.id}" class="text-secondary font-weight-bold text-xs me-2" data-toggle="tooltip" title="Edit Buku">
-                          <i class="ni ni-ruler-pencil text-lg opacity-10"></i>
-                        </a>
-                        <button class="btn-delete text-secondary mx-2" 
-                          data-id="${buku.id}" 
-                          style="background: none; border: none; padding: 0; cursor: pointer;">
-                          <i class="ni ni-fat-remove text-lg" aria-hidden="true"></i>
-                        </button>
-                    </td>
-                `;
-
-                tableBody.appendChild(tr);
-            });
-
-            // button buat delete buku
-            const deleteButtons = document.querySelectorAll('.btn-delete');
-            deleteButtons.forEach(button => {
-                button.addEventListener('click', function () {
-                    const id = this.getAttribute('data-id');
-
-                    Swal.fire({
-                        title: 'Warning',
-                        text: "Apakah Anda yakin ingin menghapus data buku ini?",
-                        icon: 'warning',
-                        showCancelButton: true,
-                        confirmButtonColor: '#3085d6',
-                        cancelButtonColor: '#d33',
-                        confirmButtonText: 'Hapus'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            fetch(`/api/buku/delete/${id}`, {
-                                method: 'DELETE',
-                                headers: {
-                                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                                    'Accept': 'application/json'
-                                }
-                            })
-                            .then(response => response.json())
-                            .then(data => {
-                                if (data.status === 'success') {
-                                    Swal.fire('Deleted!', data.messages, 'success').then(() => {
-                                        location.reload();
-                                    });
-                                } else {
-                                    Swal.fire('Error!', data.messages, 'error');
-                                }
-                            })
-                            .catch(error => {
-                                Swal.fire('Error!', 'Something went wrong!', 'error');
-                                console.error('Error:', error);
-                            });
-                        }
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Buat mengambil data buku
+        fetch('/api/buku')
+            .then(response => response.json())
+            .then(data => {
+                const tableBody = document.querySelector('tbody');
+                tableBody.innerHTML = '';
+    
+                if (data.data.length > 0) {
+                    data.data.forEach(buku => {
+                        const tr = document.createElement('tr');
+    
+                        tr.innerHTML = `
+                            <td><h6 class="mb-0 text-sm">${buku.judul}</h6></td>
+                            <td><p class="text-xs font-weight-bold mb-0">${buku.penulis}</p></td>
+                            <td><p class="text-xs font-weight-bold mb-0">${buku.penerbit}</p></td>
+                            <td class="align-middle text-center">
+                                <span class="text-secondary text-xs font-weight-bold">${buku.tahun_terbit}</span>
+                            </td>
+                            <td class="align-middle text-center">
+                                <span class="text-secondary text-xs font-weight-bold">${buku.genre}</span>
+                            </td>
+                            <td class="align-middle text-center">
+                                <a href="/editbuku/${buku.id}" class="text-secondary font-weight-bold text-xs me-2" data-toggle="tooltip" title="Edit Buku">
+                                    <i class="ni ni-ruler-pencil text-lg opacity-10"></i>
+                                </a>
+                                <button class="btn-delete text-secondary mx-2" 
+                                    data-id="${buku.id}" 
+                                    style="background: none; border: none; padding: 0; cursor: pointer;">
+                                    <i class="ni ni-fat-remove text-lg" aria-hidden="true"></i>
+                                </button>
+                            </td>
+                        `;
+    
+                        tableBody.appendChild(tr);
                     });
-                });
+    
+                    // Button buat delete buku
+                    const deleteButtons = document.querySelectorAll('.btn-delete');
+                    deleteButtons.forEach(button => {
+                        button.addEventListener('click', function () {
+                            const id = this.getAttribute('data-id');
+    
+                            Swal.fire({
+                                title: 'Warning',
+                                text: "Apakah Anda yakin ingin menghapus data buku ini?",
+                                icon: 'warning',
+                                showCancelButton: true,
+                                confirmButtonColor: '#3085d6',
+                                cancelButtonColor: '#d33',
+                                confirmButtonText: 'Hapus'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    fetch(`/api/buku/delete/${id}`, {
+                                        method: 'DELETE',
+                                        headers: {
+                                            'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                                            'Accept': 'application/json'
+                                        }
+                                    })
+                                    .then(response => response.json())
+                                    .then(data => {
+                                        if (data.status === 'success') {
+                                            Swal.fire('Deleted!', data.messages, 'success').then(() => {
+                                                location.reload();
+                                            });
+                                        } else {
+                                            Swal.fire('Error!', data.messages, 'error');
+                                        }
+                                    })
+                                    .catch(error => {
+                                        Swal.fire('Error!', 'Something went wrong!', 'error');
+                                        console.error('Error:', error);
+                                    });
+                                }
+                            });
+                        });
+                    });
+    
+                } else {
+                    tableBody.innerHTML = `
+                        <tr>
+                            <td colspan="6" class="text-center text-secondary">Tidak ada data buku.</td>
+                        </tr>
+                    `;
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
             });
-        } else {
-            tableBody.innerHTML = `
-                <tr>
-                    <td colspan="6" class="text-center text-secondary">Tidak ada data buku.</td>
-                </tr>
-            `;
-        }
-    })
-    .catch(error => {
-        console.error('Error fetching data:', error);
     });
-});
-
-</script>
+    </script>
+    
 
 </body>
 </html>

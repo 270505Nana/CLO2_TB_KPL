@@ -137,9 +137,9 @@
                       <th scope="col" class="text-secondary text-xxs font-weight-bolder opacity-7"> Aksi</th>
                     </tr>
                   </thead>
-                  <tbody class="table-group-divider ml-3">
+                  <tbody class="table-group-divider ml-3" id="dataMahasiswa">
                     {{-- disesuaikan dengan yang di controller dll yang sudah disetting sblumnya --}}
-                    @foreach ($mahasiswas as $mhs)
+                    {{-- @foreach ($mahasiswas as $mhs)
                     <tr>
                       <td class="text-start text-xs">{{ $mhs->nim }}</td>
                       <td class="text-start text-xs">{{ $mhs->prodi }}</td>
@@ -159,7 +159,9 @@
 
                       </td>
                     </tr>
-                    @endforeach
+                    @endforeach --}}
+
+
                   </tbody>
                 </table>
               </div>
@@ -242,6 +244,7 @@
       </div>
     </div>
   </div>
+
   <!--   Core JS Files   -->
   <script src="../assets/js/core/popper.min.js"></script>
   <script src="../assets/js/core/bootstrap.min.js"></script>
@@ -264,61 +267,104 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
-document.addEventListener('DOMContentLoaded', function () {
-    const deleteButtons = document.querySelectorAll('.btn-delete');
-
-    deleteButtons.forEach(button => {
-        button.addEventListener('click', function () {
-            const nim = this.getAttribute('data-nim');
-
-            Swal.fire({
-                title: 'Warning',
-                text: "Apakah Anda yakin ingin menghapus data mahasiswa dengan NIM: " + nim + "?",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Hapus'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    fetch(`/api/mahasiswa/delete/${nim}`, {
-                        method: 'DELETE',
-                        headers: {
-                            'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                            'Accept': 'application/json'
-                        }
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.status === 'success') {
-                            Swal.fire(
-                                'Deleted!',
-                                data.messages,
-                                'success'
-                            ).then(() => {
-                                location.reload(); // Reload the page after deletion
-                            });
-                        } else {
-                            Swal.fire(
-                                'Error!',
-                                data.messages,
-                                'error'
-                            );
-                        }
-                    })
-                    .catch(error => {
-                        Swal.fire(
-                            'Error!',
-                            'Something went wrong!',
-                            'error'
-                        );
-                        console.error('Error:', error);
-                    });
-                }
-            });
-        });
-    });
-});
+  document.addEventListener('DOMContentLoaded', function () {
+      fetch('/api/mahasiswa')
+          .then(response => response.json())
+          .then(data => {
+              const tableBody = document.querySelector('tbody');
+              tableBody.innerHTML = '';
+  
+              if (data.data.length > 0) {
+                  data.data.forEach(mahasiswa => {
+                      const tr = document.createElement('tr');
+  
+                      tr.innerHTML = `
+                          <td><p class="text-xs font-weight-bold mb-0">${mahasiswa.nim}</p></td>
+                          <td><p class="text-xs font-weight-bold mb-0">${mahasiswa.nama}</p></td>
+                          
+                          <td><p class="text-xs font-weight-bold mb-0">${mahasiswa.prodi}</p></td>
+                          <td><p class="text-xs font-weight-bold mb-0">${mahasiswa.fakultas}</p></td>
+                          <td><p class="text-xs font-weight-bold mb-0">${mahasiswa.angkatan}</p></td>
+                          <td><p class="text-xs font-weight-bold mb-0">${mahasiswa.nomor_hp}</p></td>
+                        
+                          <td class="align-middle text-center">
+                              <a href="/editmahasiswa/${mahasiswa.nim}" class="text-secondary font-weight-bold text-xs me-2" data-toggle="tooltip" title="Edit Mahasiswa">
+                                  <i class="ni ni-ruler-pencil text-lg opacity-10"></i>
+                              </a>
+                              <button class="btn-delete text-secondary mx-2" 
+                                  data-nim="${mahasiswa.nim}" 
+                                  style="background: none; border: none; padding: 0; cursor: pointer;">
+                                  <i class="ni ni-fat-remove text-lg" aria-hidden="true"></i>
+                              </button>
+                          </td>
+                      `;
+  
+                      tableBody.appendChild(tr);
+                  });
+  
+                  const deleteButtons = document.querySelectorAll('.btn-delete');
+  
+                  deleteButtons.forEach(button => {
+                      button.addEventListener('click', function () {
+                          const nim = this.getAttribute('data-nim');
+  
+                          Swal.fire({
+                              title: 'Warning',
+                              text: "Apakah Anda yakin ingin menghapus data mahasiswa dengan NIM: " + nim + "?",
+                              icon: 'warning',
+                              showCancelButton: true,
+                              confirmButtonColor: '#3085d6',
+                              cancelButtonColor: '#d33',
+                              confirmButtonText: 'Hapus'
+                          }).then((result) => {
+                              if (result.isConfirmed) {
+                                  fetch(`/api/mahasiswa/delete/${nim}`, {
+                                      method: 'DELETE',
+                                      headers: {
+                                          'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                                          'Accept': 'application/json'
+                                      }
+                                  })
+                                  .then(response => response.json())
+                                  .then(data => {
+                                      if (data.status === 'success') {
+                                          Swal.fire(
+                                              'Deleted!',
+                                              data.messages,
+                                              'success'
+                                          ).then(() => {
+                                              location.reload(); // Reload the page after deletion
+                                          });
+                                      } else {
+                                          Swal.fire(
+                                              'Error!',
+                                              data.messages,
+                                              'error'
+                                          );
+                                      }
+                                  })
+                                  .catch(error => {
+                                      Swal.fire(
+                                          'Error!',
+                                          'Something went wrong!',
+                                          'error'
+                                      );
+                                      console.error('Error:', error);
+                                  });
+                              }
+                          });
+                      });
+                  });
+              } else {
+                  tableBody.innerHTML = '<tr><td colspan="5" class="text-center">Tidak ada data mahasiswa.</td></tr>';
+              }
+          })
+          .catch(error => {
+              console.error('Error fetching mahasiswa data:', error);
+          });
+  });
+  </script>
+  
 </script>
 
 </body>

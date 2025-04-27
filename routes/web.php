@@ -43,8 +43,6 @@ Route::post('/mahasiswa/store', [MahasiswaController::class, 'store'])->name('ma
 // MahasiswaController::class, 'store' -> artinya di proses di controller mahasiswa dengan methodnya store
 // mahasiswa.store itu buat nama routesnya
 
-Route::delete('/deletemahasiswa/{nim}', [MahasiswaController::class, 'destroy'])->name('mahasiswa.destroy');
-
 Route::get('/datapeminjaman', function () {
     return view('DataPeminjaman');
 });

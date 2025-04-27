@@ -151,13 +151,12 @@
                         <a href="/editmahasiswa/{{ $mhs->id }}" class="text-secondary mx-2">
                           <i class="ni ni-ruler-pencil text-lg" aria-hidden="true"></i>
                         </a>
-                        <form action="{{ route('mahasiswa.destroy', $mhs->nim) }}" method="POST" style="display: inline-block;" onsubmit="return confirm('Yakin Ingin Menghapus Data Mahasiswa?')">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="text-secondary mx-2" style="background: none; border: none; padding: 0; cursor: pointer;">
-                                <i class="ni ni-fat-remove text-lg" aria-hidden="true"></i>
-                            </button>
-                        </form>
+                        <button class="btn-delete text-secondary mx-2" 
+                          data-nim="{{ $mhs->nim }}" 
+                          style="background: none; border: none; padding: 0; cursor: pointer;">
+                          <i class="ni ni-fat-remove text-lg" aria-hidden="true"></i>
+                      </button>
+
                       </td>
                     </tr>
                     @endforeach
@@ -261,6 +260,67 @@
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="../assets/js/argon-dashboard.min.js?v=2.1.0"></script>
+  <!-- Include SweetAlert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const deleteButtons = document.querySelectorAll('.btn-delete');
+
+    deleteButtons.forEach(button => {
+        button.addEventListener('click', function () {
+            const nim = this.getAttribute('data-nim');
+
+            Swal.fire({
+                title: 'Warning',
+                text: "Apakah Anda yakin ingin menghapus data mahasiswa dengan NIM: " + nim + "?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Hapus'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    fetch(`/api/mahasiswa/delete/${nim}`, {
+                        method: 'DELETE',
+                        headers: {
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                            'Accept': 'application/json'
+                        }
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.status === 'success') {
+                            Swal.fire(
+                                'Deleted!',
+                                data.messages,
+                                'success'
+                            ).then(() => {
+                                location.reload(); // Reload the page after deletion
+                            });
+                        } else {
+                            Swal.fire(
+                                'Error!',
+                                data.messages,
+                                'error'
+                            );
+                        }
+                    })
+                    .catch(error => {
+                        Swal.fire(
+                            'Error!',
+                            'Something went wrong!',
+                            'error'
+                        );
+                        console.error('Error:', error);
+                    });
+                }
+            });
+        });
+    });
+});
+</script>
+
 </body>
 
 </html>

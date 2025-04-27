@@ -151,9 +151,13 @@
                         <a href="/editmahasiswa/{{ $mhs->id }}" class="text-secondary mx-2">
                           <i class="ni ni-ruler-pencil text-lg" aria-hidden="true"></i>
                         </a>
-                        <a href="/deletemahasiswa/{{ $mhs->id }}" class="text-secondary mx-2" onclick="return confirm('Yakin mau hapus?')">
-                          <i class="ni ni-fat-remove text-lg" aria-hidden="true"></i>
-                        </a>
+                        <form action="{{ route('mahasiswa.destroy', $mhs->nim) }}" method="POST" style="display: inline-block;" onsubmit="return confirm('Yakin Ingin Menghapus Data Mahasiswa?')">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="text-secondary mx-2" style="background: none; border: none; padding: 0; cursor: pointer;">
+                                <i class="ni ni-fat-remove text-lg" aria-hidden="true"></i>
+                            </button>
+                        </form>
                       </td>
                     </tr>
                     @endforeach

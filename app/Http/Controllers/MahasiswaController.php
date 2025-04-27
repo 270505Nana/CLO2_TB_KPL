@@ -39,6 +39,14 @@ class MahasiswaController extends Controller
         ]);
 
         // Redirect atau kasih feedback ke user
-        return redirect()->back()->with('success', 'Data Mahasiswa Berhasil Disimpan!');
+        return redirect()->route('mahasiswa.show')->with('success', 'Data Mahasiswa Berhasil Disimpan!');
+    }
+
+    public function destroy($nim)
+    {
+        $mahasiswa = Mahasiswa::where('nim', $nim)->firstOrFail();
+        $mahasiswa->delete();
+    
+        return redirect()->route('mahasiswa.show')->with('success', 'Data Mahasiswa Berhasil Dihapus!');
     }
 }

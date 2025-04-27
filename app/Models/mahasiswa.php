@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class mahasiswa extends Model
 {
     Use HasFactory;
+
+    protected $primaryKey = 'nim';
+    
     protected $fillable = [
         'nama',
         'nim',

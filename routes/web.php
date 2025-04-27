@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\BukuController;
+use App\Http\Controllers\PeminjamanController;
 
 Route::get('/', function () {
     return view('Dashboard');
@@ -43,6 +44,14 @@ Route::post('/mahasiswa/store', [MahasiswaController::class, 'store'])->name('ma
 // MahasiswaController::class, 'store' -> artinya di proses di controller mahasiswa dengan methodnya store
 // mahasiswa.store itu buat nama routesnya
 
-Route::get('/datapeminjaman', function () {
-    return view('DataPeminjaman');
-});
+
+// =========================== PEMINJAMAN ========================================================
+// Menampilkan seluruh data peminjaman
+Route::get('/datapeminjaman', [PeminjamanController::class, 'show'])->name('peminjaman.show');
+
+// Menampilkan form tambah peminjaman
+Route::get('/tambahpeminjaman', [PeminjamanController::class, 'create'])->name('peminjaman.create');
+
+// Menyimpan data peminjaman
+Route::post('/peminjaman', [PeminjamanController::class, 'store'])->name('peminjaman.store');
+

@@ -267,7 +267,7 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function () {
+ document.addEventListener('DOMContentLoaded', function () {
       fetch('/api/mahasiswa')
           .then(response => response.json())
           .then(data => {
@@ -364,7 +364,6 @@
           });
   });
   </script>
-  
 </script>
 
 </body>

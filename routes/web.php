@@ -8,9 +8,9 @@ use App\Http\Controllers\DashboardController;
 
 Route::get('/', [DashboardController::class, 'dashboard']);
 
-Route::get('/login', function () {
-    return view('Login');
-});
+// Route::get('/login', function () {
+//     return view('Login');
+// });
 
 // =========================== BUKU ========================================================
 
@@ -25,23 +25,16 @@ Route::get('/tambahdatabuku', function () {
 });
 
 
-
 // =========================== MAHASISWA ========================================================
-// Untuk menampilkan seluruh data mahasiswa dengan metode GET
-// Mengarahkan ke mahasiswa controller dengan method show
-Route::get('/datamahasiswa', [MahasiswaController::class, 'show'])->name('mahasiswa.show');
+
+Route::get('/datamahasiswa', function () {
+    return view('mahasiswa.views'); 
+});
 Route::get('/tambahdatamahasiswa', function () {
     return view('mahasiswa/form');
 });
 
 Route::post('/mahasiswa/store', [MahasiswaController::class, 'store'])->name('mahasiswa.store');
-// post : mengirim data
-// store : manggil dari controller
-// terus ini itu simplenya sebut aja url nya buat routes /mahasiswa/routes artinya baris dibawah ini
-// yang akan dieksekusi
-
-// MahasiswaController::class, 'store' -> artinya di proses di controller mahasiswa dengan methodnya store
-// mahasiswa.store itu buat nama routesnya
 
 
 // =========================== PEMINJAMAN ========================================================

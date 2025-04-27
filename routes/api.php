@@ -18,5 +18,6 @@ Route::prefix('mahasiswa')->group(function () {
 // API UNTUK DATA BUKU
 Route::prefix('buku')->group(function () {
     Route::get('/',[BukuController::class, 'show'])->name('buku.index');
+    Route::post('/',[BukuController::class, 'store'])->name('buku.store');
     Route::delete('/delete/{id}', [BukuController::class, 'destroy'])->name('buku.destroy');
 });

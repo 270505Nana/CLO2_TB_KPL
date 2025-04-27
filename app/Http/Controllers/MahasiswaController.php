@@ -9,10 +9,38 @@ use App\Models\Mahasiswa;
 class MahasiswaController extends Controller
 {
     // Function show untuk meng get data
+    // public function show()
+    // {
+    //     $mahasiswas = Mahasiswa::all();
+    //     return view('mahasiswa.views', compact('mahasiswas'));
+    // }
+
     public function show()
     {
-        $mahasiswas = Mahasiswa::all();
-        return view('mahasiswa.views', compact('mahasiswas'));
+        try {
+            $mahasiswas = Mahasiswa::all();
+
+            if ($mahasiswas->isEmpty()) {
+                return response()->json([
+                    'code' => 404,
+                    'status' => 'empty',
+                    'message' => 'Tidak ada mahasiswa yang terdaftar, coba tambah data dulu ya cantik.'
+                ], 404);
+            }
+
+            return response()->json([
+                'code' => 200,
+                'status' => 'success',
+                'data' => $mahasiswas
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'code' => 500,
+                'status' => 'error',
+                'message' => 'Gagal mengambil data mahasiswa.',
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
 
     //membuat function untuk store data alias mengirim data

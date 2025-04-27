@@ -34,13 +34,6 @@ Route::get('/tambahdatamahasiswa', function () {
     return view('mahasiswa.form');
 });
 
-// post : mengirim data
-// store : manggil dari controller
-// terus ini itu simplenya sebut aja url nya buat routes /mahasiswa/routes artinya baris dibawah ini
-// yang akan dieksekusi
-
-// MahasiswaController::class, 'store' -> artinya di proses di controller mahasiswa dengan methodnya store
-// mahasiswa.store itu buat nama routesnya
 Route::post('/mahasiswa/store', [MahasiswaController::class, 'store'])->name('mahasiswa.store');
 
 

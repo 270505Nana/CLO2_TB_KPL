@@ -136,31 +136,6 @@
               <a href="javascript:;" class="nav-link text-white p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                 <i class="fa fa-bell cursor-pointer"></i>
               </a>
-              <ul class="dropdown-menu  dropdown-menu-end  px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
-
-                <li>
-                  <a class="dropdown-item border-radius-md" href="javascript:;">
-                    <div class="d-flex py-1">
-                      <div class="avatar avatar-sm bg-gradient-secondary  me-3  my-auto">
-                        <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                          <title>credit-card</title>
-                          <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                            <g transform="translate(-2169.000000, -745.000000)" fill="#FFFFFF" fill-rule="nonzero">
-                              <g transform="translate(1716.000000, 291.000000)">
-                                <g transform="translate(453.000000, 454.000000)">
-                                  <path class="color-background" d="M43,10.7482083 L43,3.58333333 C43,1.60354167 41.3964583,0 39.4166667,0 L3.58333333,0 C1.60354167,0 0,1.60354167 0,3.58333333 L0,10.7482083 L43,10.7482083 Z" opacity="0.593633743"></path>
-                                  <path class="color-background" d="M0,16.125 L0,32.25 C0,34.2297917 1.60354167,35.8333333 3.58333333,35.8333333 L39.4166667,35.8333333 C41.3964583,35.8333333 43,34.2297917 43,32.25 L43,16.125 L0,16.125 Z M19.7083333,26.875 L7.16666667,26.875 L7.16666667,23.2916667 L19.7083333,23.2916667 L19.7083333,26.875 Z M35.8333333,26.875 L28.6666667,26.875 L28.6666667,23.2916667 L35.8333333,23.2916667 L35.8333333,26.875 Z"></path>
-                                </g>
-                              </g>
-                            </g>
-                          </g>
-                        </svg>
-                      </div>
-                    </div>
-                  </a>
-                </li>
-                
-              </ul>
             </li>
           </ul>
         </div>
@@ -169,6 +144,7 @@
     <!-- End Navbar -->
 
     <div class="container-fluid py-4">
+
       {{-- row dashboard bag atas --}}
       <div class="row">
 
@@ -181,18 +157,13 @@
                   <div class="numbers">
                     <p class="text-sm mb-0 text-uppercase font-weight-bold">Jumlah buku</p>
                     <h5 class="font-weight-bolder">
-                      53
+                      {{ $jumlahBuku }}
                     </h5>
-                    {{-- <p class="mb-0">
-                      <span class="text-success text-sm font-weight-bolder">blabla</span>
-                      blabla
-                    </p> --}}
                   </div>
                 </div>
+                {{-- icon --}}
                 <div class="col-4 text-end">
                   <div class="icon icon-shape bg-gradient-primary shadow-primary text-center rounded-circle">
-                    {{-- looking for book icon --}}
-                    {{-- <i class="ni ni-money-coins text-lg opacity-10" aria-hidden="true"></i> --}}
                     <i class="ni ni-books text-lg opacity-10" aria-hidden="true"></i>
                   </div>
                 </div>
@@ -210,7 +181,7 @@
                   <div class="numbers">
                     <p class="text-sm mb-0 text-uppercase font-weight-bold">Jumlah mahasiswa</p>
                     <h5 class="font-weight-bolder">
-                      2,300 mahasiswa
+                      {{ $jumlahMahasiswa }} mahasiswa
                     </h5>
                   </div>
                 </div>
@@ -248,10 +219,7 @@
           </div>
         </div>
       </div>
-      <div class="row mt-4">
 
-        
-      </div>
       <div class="row mt-4">
         <div class="col-lg-7 mb-lg-0 mb-4">
           <div class="card ">
@@ -262,85 +230,26 @@
             </div>
             <div class="table-responsive">
               <table class="table align-items-center ">
-                <tbody>
-                  <tr>
-                    <td class="w-30">
-                      <div class="d-flex px-2 py-1 align-items-center">
-                        <div class="ms-4">
-                          <p class="text-xs font-weight-bold mb-0">Judul buku:</p>
-                          <h6 class="text-sm mb-0">Harry Potter</h6>
+                <tbody class="table-group-divider ml-3">
+                  @foreach ($bukus as $buku)
+                    <tr>
+                      <td class="w-30">
+                        <div class="d-flex px-2 py-1 align-items-center">
+                            <div class="ms-4">
+                                <p class="text-xs font-weight-bold mb-0">Judul buku:</p>
+                                <h6 class="text-sm mb-0">{{ $buku->judul }}</h6>
+                            </div>
                         </div>
-                      </div>
-                    </td>
-
-                    <td>
-                      <div class="text-center">
-                        <p class="text-xs font-weight-bold mb-0">Penulis:</p>
-                        <h6 class="text-sm mb-0">JK Rowling</h6>
-                      </div>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <td class="w-30">
-                      <div class="d-flex px-2 py-1 align-items-center">
-                        <div class="ms-4">
-                          <p class="text-xs font-weight-bold mb-0">Judul buku:</p>
-                          <h6 class="text-sm mb-0">Narnia</h6>
+                      </td>
+              
+                      <td>
+                        <div class="text-center">
+                            <p class="text-xs font-weight-bold mb-0">Penulis:</p>
+                            <h6 class="text-sm mb-0">{{ $buku->penulis }}</h6>
                         </div>
-                      </div>
-                    </td>
-                    <td>
-                      <div class="text-center">
-                        <p class="text-xs font-weight-bold mb-0">Penulis:</p>
-                        <h6 class="text-sm mb-0">Nana</h6>
-                      </div>
-                    </td>
-                  </tr>
-                  
-                  <tr>
-                    <td class="w-30">
-                      <div class="d-flex px-2 py-1 align-items-center">
-                        <div class="ms-4">
-                          <p class="text-xs font-weight-bold mb-0">Judul buku:</p>
-                          <h6 class="text-sm mb-0">Great Britain</h6>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <div class="text-center">
-                        <p class="text-xs font-weight-bold mb-0">Penulis:</p>
-                        <h6 class="text-sm mb-0">Sofia</h6>
-                      </div>
-                    </td>
-                  </tr>
-                
-                  <tr>
-                    <td class="w-30">
-                      <div class="d-flex px-2 py-1 align-items-center">
-                        <div class="ms-4">
-                          <p class="text-xs font-weight-bold mb-0">Judul buku:</p>
-                          <h6 class="text-sm mb-0">Great Britain</h6>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <div class="text-center">
-                        <p class="text-xs font-weight-bold mb-0">Penulis:</p>
-                        <h6 class="text-sm mb-0">Sofia</h6>
-                      </div>
-                    </td>
-                  </tr>
-                  
-                  <tr>
-                    <td>
-                      <div class="d-flex px-2 py-1 align-items-center">
-                        <p class="text-xs font-weight-bold mb-0">Tampilkan lebih banyak buku</p>
-                        <button class="btn btn-link btn-icon-only btn-rounded btn-sm text-dark icon-move-right my-auto"><i class="ni ni-bold-right" aria-hidden="true"></i></button>
-                      </div>
-                    </td> 
-                  </tr>
-
+                      </td>
+                    </tr>
+                  @endforeach
                 </tbody>
               </table>
             </div>

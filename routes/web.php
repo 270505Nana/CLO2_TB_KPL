@@ -4,10 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\BukuController;
 use App\Http\Controllers\PeminjamanController;
+use App\Http\Controllers\DashboardController;
 
-Route::get('/', function () {
-    return view('Dashboard');
-});
+Route::get('/', [DashboardController::class, 'dashboard']);
 
 Route::get('/login', function () {
     return view('Login');

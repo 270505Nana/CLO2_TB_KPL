@@ -36,4 +36,27 @@ class BukuController extends Controller
 
         return redirect()->back()->with('success', 'Data Buku Berhasil Disimpan!');
     }
+    // Function update untuk memperbarui data buku
+    public function update(Request $request, $id)
+{
+    $request->validate([
+        'judul' => 'required|string|max:255',
+        'penulis' => 'required|string|max:255',
+        'penerbit' => 'required|string|max:255',
+        'tahun_terbit' => 'required|integer',
+        'genre' => 'required|string|max:255',
+    ]);
+
+    $buku = buku::findOrFail($id);
+
+    $buku->update([
+        'judul' => $request->judul,
+        'penulis' => $request->penulis,
+        'penerbit' => $request->penerbit,
+        'tahun_terbit' => $request->tahun_terbit,
+        'genre' => $request->genre,
+    ]);
+
+    return redirect()->route('buku.show')->with('success', 'Data Buku Berhasil Diperbarui!');
+}
 }

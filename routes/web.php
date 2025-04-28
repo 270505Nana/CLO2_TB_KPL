@@ -24,6 +24,16 @@ Route::get('/tambahdatabuku', function () {
 // Menyimpan data buku
 Route::post('/buku/store', [BukuController::class, 'store'])->name('buku.store');
 
+// Route untuk menampilkan form edit buku
+Route::get('/editbuku/{id}', function ($id) {
+    $buku = App\Models\buku::findOrFail($id);
+    return view('buku.edit', compact('buku')); // Form untuk mengedit buku
+})->name('buku.edit');
+
+// Route untuk memperbarui data buku
+Route::put('/buku/{id}', [BukuController::class, 'update'])->name('buku.update');
+
+
 
 
 // =========================== MAHASISWA ========================================================
@@ -46,3 +56,14 @@ Route::post('/mahasiswa/store', [MahasiswaController::class, 'store'])->name('ma
 Route::get('/datapeminjaman', function () {
     return view('DataPeminjaman');
 });
+
+// Route untuk menampilkan form edit mahasiswa
+Route::get('/editmahasiswa/{nim}', [MahasiswaController::class, 'edit'])->name('mahasiswa.edit');
+
+// Route untuk update data mahasiswa
+Route::put('/updatedatamahasiswa/{nim}', [MahasiswaController::class, 'update'])->name('mahasiswa.update');
+
+
+
+
+

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Mahasiswa; 
+use App\Models\Mahasiswa;
 
 class MahasiswaController extends Controller
 {
@@ -15,7 +15,7 @@ class MahasiswaController extends Controller
         return view('mahasiswa.views', compact('mahasiswas'));
     }
 
-    //membuat function untuk store data alias mengirim data
+    // Membuat function untuk store data alias mengirim data
     public function store(Request $request)
     {
         // Validasi data (opsional, tapi penting biar datanya bener)
@@ -41,4 +41,42 @@ class MahasiswaController extends Controller
         // Redirect atau kasih feedback ke user
         return redirect()->back()->with('success', 'Data Mahasiswa Berhasil Disimpan!');
     }
+
+    // Fungsi untuk menampilkan form edit data mahasiswa
+    public function edit($nim)
+    {
+        // Ambil data mahasiswa berdasarkan ID
+        $mahasiswa = Mahasiswa::findOrFail($nim);
+
+        // Tampilkan form untuk edit data mahasiswa
+        return view('mahasiswa.edit', compact('mahasiswa'));
+    }
+
+    // Fungsi untuk mengupdate data mahasiswa
+    public function update(Request $request, $nim)
+{
+    // Ambil data mahasiswa berdasarkan NIM
+    $mahasiswa = Mahasiswa::where('nim', $nim)->first();
+
+    // Cek jika mahasiswa tidak ditemukan
+    if (!$mahasiswa) {
+        return redirect()->route('mahasiswa.index')->with('error', 'Mahasiswa tidak ditemukan!');
+    }
+
+    // Validasi dan update data mahasiswa
+    $validatedData = $request->validate([
+        'nama' => 'required|string|max:255',
+        'nim' => 'required|numeric',
+        'fakultas' => 'required|string|max:255',
+        'prodi' => 'required|string|max:255',
+        'angkatan' => 'required|numeric',
+        'nomor_hp' => 'required|numeric',
+    ]);
+
+    $mahasiswa->update($validatedData);
+
+    // Redirect atau tampilkan pesan sukses
+    return redirect()->route('mahasiswa.index')->with('success', 'Data mahasiswa berhasil diupdate!');
+}
+
 }

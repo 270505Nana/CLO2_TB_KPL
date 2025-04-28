@@ -105,6 +105,14 @@ class MahasiswaController extends Controller
     }
 
     // Mengupdate data mahasiswa
+    public function edit($nim)
+    {
+        $mhs = Mahasiswa::where('nim', $nim)->firstOrFail();
+
+        return view('Mahasiswa.edit', compact('mhs'));
+    }
+
+    // Mengupdate data mahasiswa
     public function update(Request $request, $nim)
     {
         try {

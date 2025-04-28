@@ -132,15 +132,15 @@
                       <td class="align-middle"><p class="text-xs font-weight-bold mb-0 ps-3">{{ $peminjaman->id_buku }}</p></td>
                       <td class="align-middle"><p class="text-xs font-weight-bold mb-0 ps-3">{{ $peminjaman->mahasiswa->nama }}</p></td>
                       <td class="align-middle"><p class="text-xs font-weight-bold mb-0 ps-3">{{ $peminjaman->buku->judul }}</p></td>
-                      <td class="align-middle"><p class="text-xs font-weight-bold mb-0 ps-3">{{ $peminjaman->tanggal_pinjam }}</p></td>
-                      <td class="align-middle"><p class="text-xs font-weight-bold mb-0 ps-3">{{ $peminjaman->tanggal_kembali }}</p></td>
+                      <td class="align-middle"><p class="text-xs font-weight-bold mb-0 ps-3">{{ \Carbon\Carbon::parse($peminjaman->tanggal_pinjam)->translatedFormat('d F Y') }}</p></td>
+                      <td class="align-middle"><p class="text-xs font-weight-bold mb-0 ps-3">{{ \Carbon\Carbon::parse($peminjaman->tanggal_kembali)->translatedFormat('d F Y') }}</p></td>
                       <td class="align-middle">
-                        <a href="/editpeminjaman/{{ $peminjaman->id_buku }}" class="text-secondary mx-2">
+                        <a href="/editpeminjaman/{{ $peminjaman->id }}" class="text-secondary mx-2">
                           <i class="ni ni-ruler-pencil text-lg" aria-hidden="true"></i>
                         </a>
-                     
-                        <button class="btn-delete text-danger mx-2" 
-                                data-id="{{ $peminjaman->id }}" 
+
+                        <button class="btn-delete text-danger mx-2"
+                                data-id="{{ $peminjaman->id }}"
                                 style="background: none; border: none; padding: 0; cursor: pointer;">
                             <i class="ni ni-fat-remove text-lg" aria-hidden="true"></i>
                         </button>

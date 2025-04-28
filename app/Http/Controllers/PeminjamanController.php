@@ -44,6 +44,17 @@ class PeminjamanController extends Controller
         return redirect()->route('peminjaman.show')->with('success', 'Data peminjaman berhasil disimpan!');
     }
 
+
+    // untuk menampilkan form edit buku
+    public function edit($id)
+    {
+        $peminjaman = Peminjaman::findOrFail($id);
+        $mahasiswa = Mahasiswa::all();
+        $buku = Buku::all();
+
+        return view('Peminjaman.edit', compact('peminjaman', 'mahasiswa', 'buku'));
+    }
+
     // Mengupdate data peminjaman
     public function update(Request $request, $id)
     {

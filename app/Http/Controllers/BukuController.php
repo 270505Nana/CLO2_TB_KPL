@@ -36,6 +36,15 @@ class BukuController extends Controller
 
         return redirect()->back()->with('success', 'Data Buku Berhasil Disimpan!');
     }
+
+    // edit data buku
+    public function edit($id)
+{
+    $buku = buku::findOrFail($id);
+    return view('buku.edit', compact('buku'));
+}
+
+
     // Function update untuk memperbarui data buku
     public function update(Request $request, $id)
 {

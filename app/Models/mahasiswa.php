@@ -12,6 +12,7 @@ class mahasiswa extends Model
     protected $primaryKey = 'nim';
     public $incrementing = false; 
     
+
     protected $fillable = [
         'nama',
         'nim',

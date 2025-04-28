@@ -32,50 +32,44 @@
       <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
       {{-- header nevbar. logo & nama aplikasi --}}
       <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/argon-dashboard/pages/dashboard.html " target="_blank">
-        <img src="{{ asset('assets/img/brain-bg.png') }}" width="35px" height="35px" class="navbar-brand-img h-100" alt="main_logo">
-        <span class="ms-1 font-weight-bold">Manajemen Perpustakaan</span>
+        <img src="{{ asset('assets/img/brain-bg.png') }}" width="25px" height="25px" class="navbar-brand-img h-100" alt="main_logo">
+        <span class="ms-0 font-weight">Manajemen Perpustakaan</span>
       </a>
     </div>
     <hr class="horizontal dark mt-0">
 
     {{-- NAVBAR --}}
     {{-- navbar nnti dibikin full --}}
-    <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
+    <div class="collapse navbar-collapse w-auto" id="sidenav-collapse-main">
       <ul class="navbar-nav">
-
-        {{-- list navbar item --}}
         <li class="nav-item">
           <a class="nav-link active" href="/">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+            <div class="icon icon-shape icon-sm text-center me-2 d-flex align-items-center justify-content-center">
               <i class="ni ni-tv-2 text-dark text-sm opacity-10"></i>
             </div>
             <span class="nav-link-text ms-1">Dashboard</span>
           </a>
         </li>
-
         <li class="nav-item">
-          {{-- HREF DIUBAH! --}}
-          <a class="nav-link " href="/databuku">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-credit-card text-dark text-sm opacity-10"></i>
+          <a class="nav-link" href="/databuku">
+            <div class="icon icon-shape icon-sm text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="ni ni-books text-dark text-sm opacity-10"></i>
             </div>
             <span class="nav-link-text ms-1">Data Buku</span>
           </a>
         </li>
-
         <li class="nav-item">
-          <a class="nav-link " href="/datamahasiswa">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-credit-card text-dark text-sm opacity-10"></i>
+          <a class="nav-link" href="/datamahasiswa">
+            <div class="icon icon-shape icon-sm text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="ni ni-hat-3 text-dark text-sm opacity-10"></i>
             </div>
             <span class="nav-link-text ms-1">Data Mahasiswa</span>
           </a>
         </li>
-
         <li class="nav-item">
-          <a class="nav-link " href="/datapeminjaman">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-app text-dark text-sm opacity-10"></i>
+          <a class="nav-link" href="/datapeminjaman">
+            <div class="icon icon-shape icon-sm text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="ni ni-basket text-dark text-sm opacity-10"></i>
             </div>
             <span class="nav-link-text ms-1">Data Peminjaman</span>
           </a>
@@ -87,7 +81,7 @@
   </aside>
   <main class="main-content position-relative border-radius-lg ">
     <!-- Navbar -->
-    <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl " id="navbarBlur" data-scroll="false">
+    <nav class="navbar navbar-main navbar-expand-lg px-0 mx-0 shadow-none border-radius-xl " id="navbarBlur" data-scroll="false">
       <div class="container-fluid py-1 px-3">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
@@ -99,21 +93,21 @@
 
         {{-- FORM PENCARIAN --}}
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
-          <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+          <div class="ms-md-auto pe-md-0 d-flex align-items-center">
             <div class="input-group">
               <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
-              <input type="text" class="form-control" placeholder="Type here...">
+              <input type="text" class="form-control" placeholder="Cari.....">
             </div>
           </div>
 
           {{-- button sign in --}}
           <ul class="navbar-nav  justify-content-end">
-            <li class="nav-item d-flex align-items-center">
-              <a href="javascript:;" class="nav-link text-white font-weight-bold px-0">
-                <i class="fa fa-user me-sm-1"></i>
-                <span class="d-sm-inline d-none">Sign In</span>
-              </a>
-            </li>
+          <li class="nav-item d-flex align-items-center">
+            <a href="javascript:;" class="nav-link text-white font-weight-bold px-0">
+              <i class="fa fa-user me-sm-1"></i>
+              <span class="d-sm-inline d-none">Sign In</span>
+            </a>
+          </li>
 
             
             <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
@@ -155,7 +149,7 @@
               <div class="row">
                 <div class="col-8">
                   <div class="numbers">
-                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Jumlah buku</p>
+                    <p class="text-sm mb-0 font-weight">Jumlah buku</p>
                     <h5 class="font-weight-bolder">
                       {{ $jumlahBuku }}
                     </h5>
@@ -179,9 +173,9 @@
               <div class="row">
                 <div class="col-8">
                   <div class="numbers">
-                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Jumlah mahasiswa</p>
+                    <p class="text-sm mb-0 font-weight-bold">Jumlah mahasiswa</p>
                     <h5 class="font-weight-bolder">
-                      {{ $jumlahMahasiswa }} mahasiswa
+                      {{ $jumlahMahasiswa }} 
                     </h5>
                   </div>
                 </div>
@@ -202,10 +196,9 @@
               <div class="row">
                 <div class="col-8">
                   <div class="numbers">
-                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Jumlah data peminjaman</p>
+                    <p class="text-sm mb-0 font-weight-bold">Jumlah data peminjaman</p>
                     <h5 class="font-weight-bolder">
-                      {{-- nanti disini dimasukin variable buat nampilih jumlah dari tabel peminjaman buku --}}
-                      50 buku dipinjam 
+                      {{ $jumlahPeminjam }}
                     </h5>
                   </div>
                 </div>
@@ -220,32 +213,34 @@
         </div>
       </div>
 
-      <div class="row mt-4">
-        <div class="col-lg-7 mb-lg-0 mb-4">
-          <div class="card ">
+      <div class="row mt-3 d-flex justify-content-center">
+        <div class="col-lg-12 mb-lg-0 mb-4">
+          <div class="card">
             <div class="card-header pb-0 p-3">
-              <div class="d-flex justify-content-between">
-                <h6 class="mb-2">Data Buku</h6>
+              <div class="d-flex justify-content-center">
+                <h6 class="mb-2">Data Buku Perpustakaan</h6>
               </div>
             </div>
             <div class="table-responsive">
-              <table class="table align-items-center ">
+              <table class="table align-items-center">
                 <tbody class="table-group-divider ml-3">
                   @foreach ($bukus as $buku)
                     <tr>
                       <td class="w-30">
                         <div class="d-flex px-2 py-1 align-items-center">
-                            <div class="ms-4">
-                                <p class="text-xs font-weight-bold mb-0">Judul buku:</p>
-                                <h6 class="text-sm mb-0">{{ $buku->judul }}</h6>
-                            </div>
+                          <div class="ms-3">
+                            <p class="text-xs font-weight-bold mb-0">Judul buku:</p>
+                            <h6 class="text-sm mb-0">{{ $buku->judul }}</h6>
+                          </div>
                         </div>
                       </td>
-              
+      
                       <td>
-                        <div class="text-center">
-                            <p class="text-xs font-weight-bold mb-0">Penulis:</p>
-                            <h6 class="text-sm mb-0">{{ $buku->penulis }}</h6>
+                        <div class="ms-3">
+                        <div class="text-between">
+                          <p class="text-xs font-weight-bold mb-0">Penulis:</p>
+                          <h6 class="text-sm mb-0">{{ $buku->penulis }}</h6>
+                        </div>
                         </div>
                       </td>
                     </tr>
@@ -256,40 +251,40 @@
           </div>
         </div>
       </div>
+      
 
 
-      <footer class="footer pt-3  ">
-        <div class="container-fluid">
-          <div class="row align-items-center justify-content-lg-between">
-            <div class="col-lg-6 mb-lg-0 mb-4">
-              <div class="copyright text-center text-sm text-muted text-lg-start">
-                © <script>
-                  document.write(new Date().getFullYear())
-                </script>,
-                made with <i class="fa fa-heart"></i> by
-                <a href="https://www.creative-tim.com" class="font-weight-bold" target="_blank">Creative Tim</a>
-                for a better web.
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <ul class="nav nav-footer justify-content-center justify-content-lg-end">
-                <li class="nav-item">
-                  <a href="https://www.creative-tim.com" class="nav-link text-muted" target="_blank">Creative Tim</a>
-                </li>
-                <li class="nav-item">
-                  <a href="https://www.creative-tim.com/presentation" class="nav-link text-muted" target="_blank">About Us</a>
-                </li>
-                <li class="nav-item">
-                  <a href="https://www.creative-tim.com/blog" class="nav-link text-muted" target="_blank">Blog</a>
-                </li>
-                <li class="nav-item">
-                  <a href="https://www.creative-tim.com/license" class="nav-link pe-0 text-muted" target="_blank">License</a>
-                </li>
-              </ul>
-            </div>
-          </div>
+      <footer class="footer mt-auto py-7 bg-light">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-auto text-center">
+        <div class="copyright text-sm text-muted">
+          © <script>document.write(new Date().getFullYear())</script>,
+          made with <i class="fa fa-heart text-danger"></i> by
+          <a href="https://www.creative-tim.com" class="font-weight-bold text-muted" target="_blank">Creative Tim</a>
+          for a better web.
         </div>
-      </footer>
+
+        <ul class="nav justify-content-center mt-2">
+          <li class="nav-item">
+            <a href="https://www.creative-tim.com" class="nav-link text-muted" target="_blank">Creative Tim</a>
+          </li>
+          <li class="nav-item">
+            <a href="https://www.creative-tim.com/presentation" class="nav-link text-muted" target="_blank">About Us</a>
+          </li>
+          <li class="nav-item">
+            <a href="https://www.creative-tim.com/blog" class="nav-link text-muted" target="_blank">Blog</a>
+          </li>
+          <li class="nav-item">
+            <a href="https://www.creative-tim.com/license" class="nav-link text-muted" target="_blank">License</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
     </div>
   </main>
   <div class="fixed-plugin">

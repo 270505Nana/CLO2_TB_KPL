@@ -22,16 +22,16 @@
       <main class="main-content position-relative border-radius-lg ">
         @include('layouts.navbar')
 
-      <div class="container-fluid py-4">
-        <div class="row">
-          <div class="col-12">
-            <div class="card mb-4">
+    <div class="container-fluid py-4">
+      <div class="row">
+        <div class="col-12">
+          <div class="card mb-4">
 
-              {{-- CARD ATAS --}}
-              <div class="card-header pb-0 d-flex justify-content-between">
-                <h6>Tabel Mahasiswa</h6>
-                <a class="btn btn-success btn-sm" href="/tambahdatabuku">Tambah Mahasiswa</a>
-              </div>
+            {{-- CARD ATAS --}}
+            <div class="card-header pb-0 d-flex justify-content-between">
+              <h6>Tabel Mahasiswa</h6>
+              <a class="btn btn-success btn-sm" href="{{route('tambah.mahasiswa')}}">Tambah Mahasiswa</a>
+            </div>
 
               <div class="card-body px-0 pt-0 pb-2">
                 <div class="table-responsive p-0">

@@ -44,35 +44,49 @@ class PeminjamanController extends Controller
         return redirect()->route('peminjaman.show')->with('success', 'Data peminjaman berhasil disimpan!');
     }
 
-    // Menampilkan form edit data peminjaman
-    public function edit($id)
-{
-    $peminjaman = Peminjaman::findOrFail($id); // Cari data berdasarkan ID
-    $buku = Buku::all(); // Kalau kamu perlu data buku
-    $mahasiswa = Mahasiswa::all(); // Kalau kamu perlu data mahasiswa
-    return view('peminjaman.edit', compact('peminjaman', 'buku', 'mahasiswa'));
-}
-
-
     // Mengupdate data peminjaman
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'nim' => 'required',
-            'id_buku' => 'required',
-            'tanggal_pinjam' => 'required|date',
-            'tanggal_kembali' => 'required|date',
-        ]);
+        try {
+            $request->validate([
+                'nim' => 'required|exists:mahasiswas,nim', 
+                'id_buku' => 'required|exists:bukus,id',  
+                'tanggal_pinjam' => 'required|date',
+                'tanggal_kembali' => 'nullable|date',  
+            ]);
 
-        $peminjaman = Peminjaman::findOrFail($id);
-        $peminjaman->update([
-            'nim' => $request->nim,
-            'id_buku' => $request->id_buku,
-            'tanggal_pinjam' => $request->tanggal_pinjam,
-            'tanggal_kembali' => $request->tanggal_kembali,
-        ]);
+            // Mencari peminjaman berdasarkan ID
+            $peminjaman = Peminjaman::findOrFail($id);
 
-        return redirect()->route('peminjaman.show')->with('success', 'Data peminjaman berhasil diperbarui!');
+            // Update data peminjaman
+            $peminjaman->update([
+                'nim' => $request->nim,
+                'id_buku' => $request->id_buku,
+                'tanggal_pinjam' => $request->tanggal_pinjam,
+                'tanggal_kembali' => $request->tanggal_kembali,
+            ]);
+
+            // Kembalikan response sukses
+            return response()->json([
+                'status' => 'success',
+                'code' => 200,
+                'message' => 'Data peminjaman berhasil diperbarui!',
+                'data' => $peminjaman
+            ], 200);
+
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return response()->json([
+                'status' => 'error',
+                'code' => 422,
+                'message' => 'Validasi gagal: ' . $e->getMessage()
+            ], 422);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'code' => 500,
+                'message' => 'Terjadi kesalahan: ' . $e->getMessage()
+            ], 500);
+        }
     }
 
     // Menghapus data peminjaman

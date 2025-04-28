@@ -10,14 +10,9 @@ class mahasiswa extends Model
     Use HasFactory;
 
     protected $primaryKey = 'nim';
-<<<<<<< HEAD
     public $incrementing = false; 
     
-=======
 
-    public $incrementing = false;
-
->>>>>>> nana-update-mahasiswa
     protected $fillable = [
         'nama',
         'nim',

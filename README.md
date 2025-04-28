@@ -1,61 +1,54 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+Penjelasan buat routes
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
 
-## About Laravel
+Route::get('/', function () {
+    return view('Dashboard');
+});
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Route::get('/login', function () {
+    return view('Login');
+});
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Route::get('/databuku', function () {
+    return view('buku/views');
+});
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Route::get('/tambahdatabuku', function () {
+    return view('FormDataBuku');
+});
 
-## Learning Laravel
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+=========================== Routes MAHASISWA ====================================================
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Route::get('/datamahasiswa', [MahasiswaController::class, 'show'])->name('mahasiswa.show');
+> jadi nanti button/navbar itu mengarahkan ke /datamahasiswa setelah itu diarahkan ke controller
+> Mahasiswa dengan method show untuk menampilkan data. makanya dia menggunakan methodnya GET untuk
+> mengambil data
+> Untuk menampilkan seluruh data mahasiswa dengan metode GET
+> Mengarahkan ke mahasiswa controller dengan method show
 
-## Laravel Sponsors
+Route::get('/tambahdatamahasiswa', function () {
+    return view('mahasiswa/form');
+});
+> Untuk menambahkan data, jadi disini itu nampilin dulu nih formnya
+> dengan nama routesnya itu ya tambahdatamahasiswa untuk menampilkan form tambah datanya
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+Route::post('/mahasiswa/store', [MahasiswaController::class, 'store'])->name('mahasiswa.store');
+> Nah kalau ini untuk mengirim, jadi button submit & formnya itu kan menangkap data nih yang diisi
+> user, setelah itu akan diarahkan ke mahasiswa controller dengan nama method store untuk mengirim 
+> data
 
-### Premium Partners
+Route::get('/editmahasiswa/{id}', [MahasiswaController::class, 'edit'])->name('mahasiswa.edit');
+> Nah kalo ini Route untuk form edit, jadi disini dia nampilin dulu nih formnya
+> dengan nama routes ini untuk button editnya
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development/)**
-- **[Active Logic](https://activelogic.com)**
 
-## Contributing
+Route::post('/updatemahasiswa/{id}', [MahasiswaController::class, 'update'])->name('mahasiswa.update');
+> setelah itu disini dia baru nih mengupdate datanya, mengirim data yang sebelumnya diisi di form edit data mahasiswa. 
+> Diarahkan ke mahasiswa controller dengan method namanya update
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+========================================= Routes Peminjaman=====================================
+Route::get('/datapeminjaman', function () {
+    return view('DataPeminjaman');
+});

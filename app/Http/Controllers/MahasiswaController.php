@@ -41,4 +41,37 @@ class MahasiswaController extends Controller
         // Redirect atau kasih feedback ke user
         return redirect()->back()->with('success', 'Data Mahasiswa Berhasil Disimpan!');
     }
+
+    public function edit($nim)
+    {
+        $mhs = Mahasiswa::where('nim', $nim)->firstOrFail();
+    
+        return view('mahasiswa.edit', compact('mhs'));
+    }
+
+    // UPDATE DATA
+    public function update(Request $request, $nim)
+    {
+        $request->validate([
+            'nama' => 'required|string|max:255',
+            'prodi' => 'required|string|max:255',
+            'fakultas' => 'required|string|max:255',
+            'angkatan' => 'required|integer',
+            'nomor_hp' => 'required|numeric',
+        ]);
+
+        $mahasiswa = Mahasiswa::where('nim', $nim)->firstOrFail();
+
+        $mahasiswa->update([
+            'nim' => $request->nim,
+            'nama' => $request->nama,
+            'prodi' => $request->prodi,
+            'fakultas' => $request->fakultas,
+            'angkatan' => $request->angkatan,
+            'nomor_hp' => $request->nomor_hp,
+        ]);
+
+        return redirect()->route('mahasiswa.show')->with('success', 'Data berhasil diupdate!');
+    }
+
 }

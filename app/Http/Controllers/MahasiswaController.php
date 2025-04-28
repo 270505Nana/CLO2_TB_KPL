@@ -49,7 +49,7 @@ class MahasiswaController extends Controller
     try {
         // Validasi data
         $request->validate([
-            'nim' => 'required|unique:mahasiswas,nim',
+            'nim' => 'required|numeric|digits_between:10,20|unique:mahasiswas,nim',// sudah menerapkan defensive programming
             'nama' => 'required|string|max:255',
             'prodi' => 'required|string|max:255',
             'fakultas' => 'required|string|max:255',

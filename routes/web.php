@@ -47,3 +47,8 @@ Route::get('/tambahpeminjaman', [PeminjamanController::class, 'create'])->name('
 // Menyimpan data peminjaman
 Route::post('/peminjaman', [PeminjamanController::class, 'store'])->name('peminjaman.store');
 
+// Menampilkan form edit peminjaman
+Route::get('/editpeminjaman/{id}', [PeminjamanController::class, 'edit'])->name('peminjaman.edit');
+
+// Melakukan update peminjaman
+Route::put('/editpeminjaman/{id}', [PeminjamanController::class, 'update'])->name('peminjaman.update');

@@ -14,12 +14,16 @@ Route::get('/', [DashboardController::class, 'dashboard']);
 // Menampilkan seluruh data buku
 Route::get('/databuku', function () {
     return view('buku.views'); 
-});
+})->name('buku.index');
 
 // Menampilkan form tambah buku
 Route::get('/tambahdatabuku', function () {
     return view('buku.form');
 });
+
+// Menampilkan form edit buku
+Route::get('/editbuku/{id}', [BukuController::class, 'edit'])->name('buku.edit');
+
 
 
 
@@ -27,19 +31,29 @@ Route::get('/tambahdatabuku', function () {
 
 // Menampilkan seluruh data mahasiswa
 Route::get('/datamahasiswa', function () {
-
     return view('mahasiswa.views'); 
-});
+})->name('data.mahasiswa');
 
 // Menampilkan form tambah mahasiswa
 Route::get('/tambahdatamahasiswa', function () {
     return view('mahasiswa.form');
 })->name('tambah.mahasiswa');
 
+// Menampilkan form edit mahasiswa
+Route::get('/editmahasiswa/{nim}', [MahasiswaController::class, 'edit'])->name('mahasiswa.edit');
 
 // =========================== PEMINJAMAN ========================================================
 
 // Menampilkan seluruh data peminjaman
-Route::get('/datapeminjaman', [PeminjamanController::class, 'show']);
+Route::get('/datapeminjaman', [PeminjamanController::class, 'show'])->name('peminjaman.show');
+
+// Menampilkan form tambah peminjaman
+Route::get('/tambahpeminjaman', [PeminjamanController::class, 'create'])->name('peminjaman.create');
+
+// post peminjaman
+Route::post('/tambahpeminjaman', [PeminjamanController::class, 'store'])->name('peminjaman.store');
+
+// Menampilkan form edit mahasiswa
+Route::get('/editpeminjaman/{id}', [PeminjamanController::class, 'edit'])->name('peminjaman.edit');
 
 

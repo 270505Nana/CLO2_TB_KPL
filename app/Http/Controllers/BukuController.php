@@ -37,7 +37,6 @@ class BukuController extends Controller
         }
     }
 
-
     // Function store untuk menyimpan data buku baru
     public function store(Request $request)
     {
@@ -103,7 +102,15 @@ class BukuController extends Controller
             ], 404);
         }
     }
-  
+
+    // untuk menampilkan form edit buku
+    public function edit($id)
+    {
+        $buku = Buku::findOrFail($id);
+
+        return view('Buku.edit', compact('buku'));
+    }
+
     // untuk update data buku
     public function update(Request $request, $id)
     {

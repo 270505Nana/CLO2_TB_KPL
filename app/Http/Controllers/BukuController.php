@@ -103,4 +103,22 @@ class BukuController extends Controller
             ], 404);
         }
     }
+    public function update(Request $request, $id)
+    {
+        // 1. Cari buku berdasarkan ID
+        $buku = Buku::findOrFail($id);
+
+        // 2. Update data buku
+        $buku->update([
+            'judul' => $request->judul,
+            'penulis' => $request->penulis,
+            'penerbit' => $request->penerbit,
+            'tahun_terbit' => $request->tahun_terbit,
+            'genre' => $request->genre,
+        ]);
+
+        // 3. Redirect atau kasih response
+        return redirect('/databuku')->with('success', 'Data buku berhasil diupdate!');
+    }
+
 }

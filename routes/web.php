@@ -24,6 +24,13 @@ Route::get('/tambahdatabuku', function () {
     return view('buku.form');
 });
 
+//untuk mengupdate data buku
+use App\Models\Buku;
+
+Route::get('/editbuku/{id}', function ($id) {
+    $buku = Buku::findOrFail($id); // cari buku berdasarkan id
+    return view('buku.form', compact('buku'));
+});
 
 // =========================== MAHASISWA ========================================================
 

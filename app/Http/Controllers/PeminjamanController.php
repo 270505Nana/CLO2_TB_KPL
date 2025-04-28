@@ -9,25 +9,24 @@ use Illuminate\Http\Request;
 
 class PeminjamanController extends Controller
 {
-    // Menampilkan data peminjaman
+    // Menampilkan semua data peminjaman
     public function show()
     {
         $peminjamans = Peminjaman::all();
         return view('peminjaman.views', compact('peminjamans'));
     }
 
-     // Menampilkan form tambah peminjaman
+    // Menampilkan form tambah data peminjaman
     public function create()
     {
-         $mahasiswa = Mahasiswa::all(); // Ambil data mahasiswa
-         $buku = Buku::all(); // Ambil data buku
-         return view('peminjaman.form', compact('mahasiswa', 'buku')); // Kirim data mahasiswa dan buku ke view
+        $mahasiswa = Mahasiswa::all();
+        $buku = Buku::all();
+        return view('peminjaman.form', compact('mahasiswa', 'buku'));
     }
 
-     // Menyimpan data peminjaman
+    // Menyimpan data peminjaman baru
     public function store(Request $request)
     {
-         // Validasi input dari form
         $request->validate([
             'nim' => 'required',
             'id_buku' => 'required',
@@ -35,7 +34,6 @@ class PeminjamanController extends Controller
             'tanggal_kembali' => 'required|date',
         ]);
 
-         // Simpan data peminjaman ke database
         Peminjaman::create([
             'nim' => $request->nim,
             'id_buku' => $request->id_buku,
@@ -43,16 +41,46 @@ class PeminjamanController extends Controller
             'tanggal_kembali' => $request->tanggal_kembali,
         ]);
 
-         // Redirect ke halaman peminjaman dengan pesan sukses
         return redirect()->route('peminjaman.show')->with('success', 'Data peminjaman berhasil disimpan!');
     }
-    
-    //delete peminjaman berdasarkan id
+
+    // Menampilkan form edit data peminjaman
+    public function edit($id)
+{
+    $peminjaman = Peminjaman::findOrFail($id); // Cari data berdasarkan ID
+    $buku = Buku::all(); // Kalau kamu perlu data buku
+    $mahasiswa = Mahasiswa::all(); // Kalau kamu perlu data mahasiswa
+    return view('peminjaman.edit', compact('peminjaman', 'buku', 'mahasiswa'));
+}
+
+
+    // Mengupdate data peminjaman
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'nim' => 'required',
+            'id_buku' => 'required',
+            'tanggal_pinjam' => 'required|date',
+            'tanggal_kembali' => 'required|date',
+        ]);
+
+        $peminjaman = Peminjaman::findOrFail($id);
+        $peminjaman->update([
+            'nim' => $request->nim,
+            'id_buku' => $request->id_buku,
+            'tanggal_pinjam' => $request->tanggal_pinjam,
+            'tanggal_kembali' => $request->tanggal_kembali,
+        ]);
+
+        return redirect()->route('peminjaman.show')->with('success', 'Data peminjaman berhasil diperbarui!');
+    }
+
+    // Menghapus data peminjaman
     public function destroy($id)
     {
         try {
-            $peminjaman = Peminjaman::findOrFail($id); // Cari data, error kalau tidak ada
-            $peminjaman->delete(); // Hapus data
+            $peminjaman = Peminjaman::findOrFail($id);
+            $peminjaman->delete();
 
             return response()->json([
                 'code' => 200,
@@ -63,7 +91,7 @@ class PeminjamanController extends Controller
             return response()->json([
                 'code' => 404,
                 'status' => 'error',
-                'messages' => 'Data peminjaman tidak ditemukan!'
+                'message' => 'Data peminjaman tidak ditemukan!'
             ], 404);
         }
     }

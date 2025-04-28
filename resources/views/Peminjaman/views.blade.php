@@ -88,10 +88,18 @@
           <div class="ms-md-auto pe-md-3 d-flex align-items-center">
             <div class="input-group">
               <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
-              <input type="text" class="form-control" placeholder="Cari peminjaman...">
+              <input type="text" class="form-control" placeholder="Cari.....">
             </div>
           </div>
         </div>
+        {{-- button sign in --}}
+        <ul class="navbar-nav  justify-content-end">
+          <li class="nav-item d-flex align-items-center">
+            <a href="javascript:;" class="nav-link text-white font-weight-bold px-0">
+              <i class="fa fa-user me-sm-1"></i>
+              <span class="d-sm-inline d-none">Sign In</span>
+            </a>
+          </li>
       </div>
     </nav>
     <!-- End Navbar -->

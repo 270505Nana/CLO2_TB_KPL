@@ -23,6 +23,7 @@ Route::get('/databuku', function () {
 Route::get('/tambahdatabuku', function () {
     return view('buku.form');
 });
+<<<<<<< HEAD
 
 
 // =========================== MAHASISWA ========================================================
@@ -35,6 +36,16 @@ Route::get('/tambahdatamahasiswa', function () {
 });
 
 Route::post('/mahasiswa/store', [MahasiswaController::class, 'store'])->name('mahasiswa.store');
+=======
+Route::post('/mahasiswa/store', [MahasiswaController::class, 'store'])->name('mahasiswa.store');
+Route::get('/datamahasiswa', [MahasiswaController::class, 'show'])->name('mahasiswa.show');
+Route::get('/tambahdatamahasiswa', function () {
+    return view('mahasiswa/form'); 
+});
+
+Route::get('/editmahasiswa/{nim}', [MahasiswaController::class, 'edit'])->name('mahasiswa.edit');
+Route::post('/updatemahasiswa/{nim}', [MahasiswaController::class, 'update'])->name('mahasiswa.update');
+>>>>>>> nana-update-mahasiswa
 
 
 // =========================== PEMINJAMAN ========================================================

@@ -103,12 +103,27 @@ class BukuController extends Controller
             ], 404);
         }
     }
+   // edit data buku
+   public function edit($id)
+   {
+       $buku = buku::findOrFail($id);
+       return view('buku.edit', compact('buku'));
+   }
+   
+   
+    // Function update untuk memperbarui data buku
     public function update(Request $request, $id)
     {
-        // 1. Cari buku berdasarkan ID
-        $buku = Buku::findOrFail($id);
-
-        // 2. Update data buku
+        $request->validate([
+            'judul' => 'required|string|max:255',
+            'penulis' => 'required|string|max:255',
+            'penerbit' => 'required|string|max:255',
+            'tahun_terbit' => 'required|integer',
+            'genre' => 'required|string|max:255',
+        ]);
+    
+        $buku = buku::findOrFail($id);
+    
         $buku->update([
             'judul' => $request->judul,
             'penulis' => $request->penulis,
@@ -116,43 +131,8 @@ class BukuController extends Controller
             'tahun_terbit' => $request->tahun_terbit,
             'genre' => $request->genre,
         ]);
-
-        // 3. Redirect atau kasih response
-        return redirect('/databuku')->with('success', 'Data buku berhasil diupdate!');
+    
+        return redirect()->route('buku.show')->with('success', 'Data Buku Berhasil Diperbarui!');
     }
 
-}
-
-
-    // edit data buku
-    public function edit($id)
-{
-    $buku = buku::findOrFail($id);
-    return view('buku.edit', compact('buku'));
-}
-
-
-    // Function update untuk memperbarui data buku
-    public function update(Request $request, $id)
-{
-    $request->validate([
-        'judul' => 'required|string|max:255',
-        'penulis' => 'required|string|max:255',
-        'penerbit' => 'required|string|max:255',
-        'tahun_terbit' => 'required|integer',
-        'genre' => 'required|string|max:255',
-    ]);
-
-    $buku = buku::findOrFail($id);
-
-    $buku->update([
-        'judul' => $request->judul,
-        'penulis' => $request->penulis,
-        'penerbit' => $request->penerbit,
-        'tahun_terbit' => $request->tahun_terbit,
-        'genre' => $request->genre,
-    ]);
-
-    return redirect()->route('buku.show')->with('success', 'Data Buku Berhasil Diperbarui!');
-}
 }

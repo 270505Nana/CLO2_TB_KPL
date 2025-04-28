@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\BukuController;
 use App\Http\Controllers\PeminjamanController;
+use App\Models\Buku;
 use App\Http\Controllers\DashboardController;
 
 Route::get('/', [DashboardController::class, 'dashboard']);
@@ -45,26 +46,14 @@ Route::get('/editbuku/{id}', function ($id) {
 // =========================== MAHASISWA ========================================================
 
 Route::get('/datamahasiswa', function () {
-    return view('mahasiswa.views'); 
+    return view('mahasiswa.views');
 });
+
 Route::get('/tambahdatamahasiswa', function () {
     return view('mahasiswa.form');
 });
 
 Route::post('/mahasiswa/store', [MahasiswaController::class, 'store'])->name('mahasiswa.store');
-Route::get('/datamahasiswa', [MahasiswaController::class, 'show'])->name('mahasiswa.show');
-Route::get('/tambahdatamahasiswa', function () {
-    return view('mahasiswa/form'); 
-});
-
-Route::post('/mahasiswa/store', [MahasiswaController::class, 'store'])->name('mahasiswa.store');
-// post : mengirim data
-// store : manggil dari controller
-// terus ini itu simplenya sebut aja url nya buat routes /mahasiswa/routes artinya baris dibawah ini
-// yang akan dieksekusi
-
-// MahasiswaController::class, 'store' -> artinya di proses di controller mahasiswa dengan methodnya store
-// mahasiswa.store itu buat nama routesnya
 
 Route::get('/datapeminjaman', function () {
     return view('DataPeminjaman');

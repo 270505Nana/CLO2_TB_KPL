@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\BukuController;
 use App\Http\Controllers\PeminjamanController;
+use App\Models\Buku;
 use App\Http\Controllers\DashboardController;
 
 Route::get('/', [DashboardController::class, 'dashboard']);
@@ -26,6 +27,7 @@ Route::get('/tambahdatabuku', function () {
 
 // Menampilkan seluruh data mahasiswa
 Route::get('/datamahasiswa', function () {
+
     return view('mahasiswa.views'); 
 });
 

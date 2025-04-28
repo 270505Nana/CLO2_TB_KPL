@@ -103,8 +103,7 @@ class BukuController extends Controller
             ], 404);
         }
     }
-
-
+  
     // untuk update data buku
     public function update(Request $request, $id)
     {
@@ -154,6 +153,5 @@ class BukuController extends Controller
     }
 
 }
-
 
 

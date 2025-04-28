@@ -134,6 +134,7 @@
                   </thead>
                   <tbody class="table-group-divider ml-3" id="dataMahasiswa">
                   </tbody>
+
                 </table>
               </div>
             </div>
@@ -334,7 +335,6 @@
               console.error('Error fetching mahasiswa data:', error);
           });
   });
-  </script>
 </script>
 
 </body>

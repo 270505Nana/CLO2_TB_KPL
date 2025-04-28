@@ -103,56 +103,57 @@ class BukuController extends Controller
             ], 404);
         }
     }
+
+
+    // untuk update data buku
     public function update(Request $request, $id)
     {
-        // 1. Cari buku berdasarkan ID
-        $buku = Buku::findOrFail($id);
+        try {
+            // Validasi data
+            $request->validate([
+                'judul' => 'required|string|max:255',
+                'penulis' => 'required|string|max:255',
+                'penerbit' => 'required|string|max:255',
+                'tahun_terbit' => 'required|integer',
+                'genre' => 'required|string|max:255',
+            ]);
 
-        // 2. Update data buku
-        $buku->update([
-            'judul' => $request->judul,
-            'penulis' => $request->penulis,
-            'penerbit' => $request->penerbit,
-            'tahun_terbit' => $request->tahun_terbit,
-            'genre' => $request->genre,
-        ]);
+            // Cari buku berdasarkan ID
+            $buku = Buku::findOrFail($id);
 
-        // 3. Redirect atau kasih response
-        return redirect('/databuku')->with('success', 'Data buku berhasil diupdate!');
+            // Update data buku
+            $buku->update([
+                'judul' => $request->judul,
+                'penulis' => $request->penulis,
+                'penerbit' => $request->penerbit,
+                'tahun_terbit' => $request->tahun_terbit,
+                'genre' => $request->genre,
+            ]);
+
+            // Beri response sukses
+            return response()->json([
+                'status' => 'success',
+                'code' => 200,
+                'message' => 'Data buku berhasil diupdate!',
+                'data' => $buku,
+            ], 200);
+
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return response()->json([
+                'status' => 'error',
+                'code' => 422,
+                'message' => 'Validasi gagal: ' . $e->getMessage()
+            ], 422);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'code' => 500,
+                'message' => 'Terjadi kesalahan: ' . $e->getMessage()
+            ], 500);
+        }
     }
 
 }
 
 
-    // edit data buku
-    public function edit($id)
-{
-    $buku = buku::findOrFail($id);
-    return view('buku.edit', compact('buku'));
-}
 
-
-    // Function update untuk memperbarui data buku
-    public function update(Request $request, $id)
-{
-    $request->validate([
-        'judul' => 'required|string|max:255',
-        'penulis' => 'required|string|max:255',
-        'penerbit' => 'required|string|max:255',
-        'tahun_terbit' => 'required|integer',
-        'genre' => 'required|string|max:255',
-    ]);
-
-    $buku = buku::findOrFail($id);
-
-    $buku->update([
-        'judul' => $request->judul,
-        'penulis' => $request->penulis,
-        'penerbit' => $request->penerbit,
-        'tahun_terbit' => $request->tahun_terbit,
-        'genre' => $request->genre,
-    ]);
-
-    return redirect()->route('buku.show')->with('success', 'Data Buku Berhasil Diperbarui!');
-}
-}

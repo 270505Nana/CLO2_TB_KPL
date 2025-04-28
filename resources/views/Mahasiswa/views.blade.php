@@ -115,7 +115,7 @@
             {{-- CARD ATAS --}}
             <div class="card-header pb-0 d-flex justify-content-between">
               <h6>Tabel Mahasiswa</h6>
-              <a class="btn btn-success btn-sm" href="/tambahdatabuku">Tambah Mahasiswa</a>
+              <a class="btn btn-success btn-sm" href="{{route('tambah.mahasiswa')}}">Tambah Mahasiswa</a>
             </div>
 
             <div class="card-body px-0 pt-0 pb-2">
@@ -132,38 +132,7 @@
                       <th scope="col" class="text-secondary text-xxs font-weight-bolder opacity-7"> Aksi</th>
                     </tr>
                   </thead>
-<<<<<<< HEAD
                   <tbody class="table-group-divider ml-3" id="dataMahasiswa">
-=======
-                  <tbody class="table-group-divider ml-16">
->>>>>>> nana-update-mahasiswa
-                    {{-- disesuaikan dengan yang di controller dll yang sudah disetting sblumnya --}}
-                    {{-- @foreach ($mahasiswas as $mhs)
-                    <tr>
-                      <td class="align-middle"><p class="text-xs font-weight-bold mb-0 ps-3">{{ $mhs->nim }}</td>
-                      <td class="align-middle"><p class="text-xs font-weight-bold mb-0 ps-3">{{ $mhs->prodi }}</p></td>
-                      <td class="align-middle"><p class="text-xs font-weight-bold mb-0 ps-3">{{ $mhs->nama }}</td>
-                      <td class="align-middle"><p class="text-xs font-weight-bold mb-0 ps-3">{{ $mhs->fakultas }}</td>
-                      <td class="align-middle"><p class="text-xs font-weight-bold mb-0 ps-3">{{ $mhs->angkatan }}</td>
-                      <td class="align-middle"><p class="text-xs font-weight-bold mb-0 ps-3">{{ $mhs->nomor_hp }}</td>
-                      <td class="align-middle">
-                        <a href="/editmahasiswa/{{ $mhs->id }}" class="text-secondary mx-2">
-                          <i class="ni ni-ruler-pencil text-lg" aria-hidden="true"></i>
-                        </a>
-                        <button class="btn-delete text-secondary mx-1" 
-                          data-nim="{{ $mhs->nim }}" 
-                          style="background: none; border: none; padding: 0; cursor: pointer;">
-=======
-                        <a href="" class="text-secondary mx-2" onclick="return confirm('Yakin mau hapus?')">
->>>>>>> nana-update-mahasiswa
-                          <i class="ni ni-fat-remove text-lg" aria-hidden="true"></i>
-                      </button>
-
-                      </td>
-                    </tr>
-                    @endforeach --}}
-
-
                   </tbody>
                 </table>
               </div>

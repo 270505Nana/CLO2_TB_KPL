@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\buku;
+use App\Models\Buku;
 
 class BukuController extends Controller
 {
@@ -43,7 +43,7 @@ class BukuController extends Controller
     {
         try {
             // Validasi data
-            $request->validate([
+            $request->validate([ //penerapan defensive programming
                 'judul' => 'required|string|max:255',
                 'penulis' => 'required|string|max:255',
                 'penerbit' => 'required|string|max:255',
@@ -52,7 +52,7 @@ class BukuController extends Controller
             ]);
     
             // Membuat data buku baru
-            $buku = buku::create([
+            $buku = Buku::create([
                 'judul' => $request->judul,
                 'penulis' => $request->penulis,
                 'penerbit' => $request->penerbit,
@@ -70,7 +70,7 @@ class BukuController extends Controller
             // Mengembalikan validasi error 
             return response()->json([
                 'status' => 'error',
-                'code' => 500,
+                'code' => 422,
                 'message' => 'Validasi gagal: ' . $e->getMessage()
             ], 500); 
         } catch (\Exception $e) {
@@ -87,7 +87,7 @@ class BukuController extends Controller
     public function destroy($id)
     {
         try {
-            $buku = buku::findOrFail($id);
+            $buku = Buku::findOrFail($id);
             $buku->delete();
     
             return response()->json([

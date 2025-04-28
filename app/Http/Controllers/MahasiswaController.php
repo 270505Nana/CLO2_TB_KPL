@@ -8,12 +8,6 @@ use App\Models\Mahasiswa;
 
 class MahasiswaController extends Controller
 {
-    // Function show untuk meng get data
-    // public function show()
-    // {
-    //     $mahasiswas = Mahasiswa::all();
-    //     return view('mahasiswa.views', compact('mahasiswas'));
-    // }
 
     public function show()
     {
@@ -107,6 +101,54 @@ class MahasiswaController extends Controller
                 'status' => 'error',
                 'messages' => 'Data Mahasiswa tidak ditemukan!'
             ], 404);
+        }
+    }
+
+    // Mengupdate data mahasiswa
+    public function update(Request $request, $nim)
+    {
+        try {
+            // Validasi data yang akan diupdate
+            $request->validate([
+                'nama' => 'required|string|max:255',
+                'prodi' => 'required|string|max:255',
+                'fakultas' => 'required|string|max:255',
+                'angkatan' => 'required|integer|min:1900|max:' . date('Y'),
+                'nomor_hp' => 'required|string|max:20',
+            ]);
+    
+            // Cari mahasiswa berdasarkan nim
+            $mahasiswa = Mahasiswa::where('nim', $nim)->firstOrFail();
+    
+            // Update data mahasiswa kecuali nim
+            $mahasiswa->update([
+                'nama' => $request->nama,
+                'prodi' => $request->prodi,
+                'fakultas' => $request->fakultas,
+                'angkatan' => $request->angkatan,
+                'nomor_hp' => $request->nomor_hp,
+            ]);
+    
+            // Kembalikan response sukses
+            return response()->json([
+                'status' => 'success',
+                'code' => 200,
+                'message' => 'Data mahasiswa berhasil diupdate!',
+                'data' => $mahasiswa,
+            ], 200);
+    
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return response()->json([
+                'status' => 'error',
+                'code' => 422,
+                'message' => 'Validasi gagal: ' . $e->getMessage()
+            ], 422);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'code' => 500,
+                'message' => 'Terjadi kesalahan: ' . $e->getMessage()
+            ], 500);
         }
     }
     

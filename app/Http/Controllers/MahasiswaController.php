@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Mahasiswa; 
+use App\Models\Mahasiswa;
 
 class MahasiswaController extends Controller
 {
@@ -43,7 +43,7 @@ class MahasiswaController extends Controller
         }
     }
 
-    //membuat function untuk store data alias mengirim data
+    // Membuat function untuk store data alias mengirim data
     public function store(Request $request)
     {
         try {

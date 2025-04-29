@@ -1,68 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
 
-  {{-- HEADER --}}
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Manajemen Perpustakaan</title>
+@extends('layouts.master')
 
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
-    <link href="https://demos.creative-tim.com/argon-dashboard-pro/assets/css/nucleo-icons.css" rel="stylesheet" />
-    <link href="https://demos.creative-tim.com/argon-dashboard-pro/assets/css/nucleo-svg.css" rel="stylesheet" />
-    <link id="pagestyle" href="{{ asset('assets/css/argon-dashboard.css?v=2.1.0') }}" rel="stylesheet" />
-  </head>
+@section('page-title', 'Data Mahasiswa')
 
-  <body class="g-sidenav-show   bg-gray-100">
-    {{-- warna header atas --}}
-    <div class="min-height-300 bg-primary position-absolute w-100"></div>
-      @include('layouts.sidebar')
+@section('content')
+<div class="container-fluid py-4">
+  <div class="row">
+    <div class="col-12">
+      <div class="card mb-4">
+        <div class="card-header pb-0 d-flex justify-content-between">
+          <h6>Tabel Mahasiswa</h6>
+          <a class="btn btn-success btn-sm" href="{{route('tambah.mahasiswa')}}">Tambah Mahasiswa</a>
+        </div>
 
-      <main class="main-content position-relative border-radius-lg ">
-        @include('layouts.navbar')
-
-    <div class="container-fluid py-4">
-      <div class="row">
-        <div class="col-12">
-          <div class="card mb-4">
-
-            {{-- CARD ATAS --}}
-            <div class="card-header pb-0 d-flex justify-content-between">
-              <h6>Tabel Mahasiswa</h6>
-              <a class="btn btn-success btn-sm" href="{{route('tambah.mahasiswa')}}">Tambah Mahasiswa</a>
-            </div>
-
-              <div class="card-body px-0 pt-0 pb-2">
-                <div class="table-responsive p-0">
-                  <table class="table table-hover align-items-center mb-0">
-                    <thead>
-                      <tr>
-                        <th scope="col" class="text-secondary text-xxs font-weight-bolder opacity-7" > NIM</th>
-                        <th scope="col" class="text-secondary text-xxs font-weight-bolder opacity-7"> Nama mahasiswa</th>
-                        <th scope="col" class="text-secondary text-xxs font-weight-bolder opacity-7"> Program Studi mahasiswa</th>
-                        <th scope="col" class="text-secondary text-xxs font-weight-bolder opacity-7"> Fakultas mahasiswa</th>
-                        <th scope="col" class="text-secondary text-xxs font-weight-bolder opacity-7"> Angkatan</th>
-                        <th scope="col" class="text-secondary text-xxs font-weight-bolder opacity-7"> Nomor HP</th>
-                        <th scope="col" class="text-secondary text-xxs font-weight-bolder opacity-7"> Aksi</th>
-                      </tr>
-                    </thead>
-                    <tbody class="table-group-divider ml-3" id="dataMahasiswa"></tbody>
-                  </table>
-                </div>
-              </div>
+          <div class="card-body px-0 pt-0 pb-2">
+            <div class="table-responsive p-0">
+              <table class="table table-hover align-items-center mb-0">
+                <thead>
+                  <tr>
+                    <th scope="col" class="text-secondary text-xxs font-weight-bolder opacity-7" > NIM</th>
+                    <th scope="col" class="text-secondary text-xxs font-weight-bolder opacity-7"> Nama mahasiswa</th>
+                    <th scope="col" class="text-secondary text-xxs font-weight-bolder opacity-7"> Program Studi mahasiswa</th>
+                    <th scope="col" class="text-secondary text-xxs font-weight-bolder opacity-7"> Fakultas mahasiswa</th>
+                    <th scope="col" class="text-secondary text-xxs font-weight-bolder opacity-7"> Angkatan</th>
+                    <th scope="col" class="text-secondary text-xxs font-weight-bolder opacity-7"> Nomor HP</th>
+                    <th scope="col" class="text-secondary text-xxs font-weight-bolder opacity-7"> Aksi</th>
+                  </tr>
+                </thead>
+                <tbody class="table-group-divider ml-3" id="dataMahasiswa"></tbody>
+              </table>
             </div>
           </div>
         </div>
       </div>
-    </main>
+    </div>
+  </div>
+@endsection
 
-    @include('layouts.footer')
-
-    <!-- Include SweetAlert2 -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-    <script>
+@section('scripts')
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script>
     document.addEventListener('DOMContentLoaded', function () {
           fetch('/api/mahasiswa')
               .then(response => response.json())
@@ -160,7 +137,4 @@
               });
       });
     </script>
-
-  </body>
-
-</html>
+@endsection

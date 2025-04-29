@@ -1,61 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>@yield('title', 'Dashboard')</title>
+@extends('layouts.master')
 
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
-  <link href="https://demos.creative-tim.com/argon-dashboard-pro/assets/css/nucleo-icons.css" rel="stylesheet" />
-  <link href="https://demos.creative-tim.com/argon-dashboard-pro/assets/css/nucleo-svg.css" rel="stylesheet" />
-  <link id="pagestyle" href="{{ asset('assets/css/argon-dashboard.css?v=2.1.0') }}" rel="stylesheet" />
-</head>
-  
-  {{-- NAVBARRRRRR --}}
-  <body class="g-sidenav-show  bg-gray-100">
-    <div class="min-height-300 bg-primary position-absolute w-100"></div>
-    @include('layouts.sidebar')
-  
-    <main class="main-content position-relative border-radius-lg ">
-      @include('layouts.navbar')
-      
-      <div class="container-fluid py-4">
-        <div class="row">
-          <div class="col-12">
-            <div class="card mb-4">
-              <div class="card-header pb-0 d-flex justify-content-between">
-                <h6>Tabel Data Buku</h6>
-                <a class="btn btn-success btn-sm" href="/tambahdatabuku">Tambah Buku</a>
-              </div>
+@section('page-title', 'Data Buku')
 
-              <div class="card-body px-0 pt-0 pb-2">
-                <div class="table-responsive p-0">
-                  <table class="table align-items-center mb-0">
-                    <thead>
-                      <tr>
-                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Judul Buku</th>
-                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Penulis</th>
-                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Penerbit</th>
-                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tahun Terbit</th>
-                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Genre</th>
-                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Aksi</th>
-                      </tr>
-                    </thead>
-                    <tbody id="dataBuku">
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
+@section('content')
+<div class="row">
+  <div class="col-12">
+    <div class="card mb-4">
+      <div class="card-header pb-0 d-flex justify-content-between">
+        <h6>Tabel Data Buku</h6>
+        <a class="btn btn-success btn-sm" href="/tambahdatabuku">Tambah Buku</a>
+      </div>
+
+      <div class="card-body px-0 pt-0 pb-2">
+        <div class="table-responsive p-0">
+          <table class="table align-items-center mb-0">
+            <thead>
+              <tr>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Judul Buku</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Penulis</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Penerbit</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tahun Terbit</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Genre</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="dataBuku"></tbody>
+          </table>
         </div>
       </div>
-    </main>
+    </div>
+  </div>
+</div>
+@endsection
 
-  <!-- Include SweetAlert2 -->
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+@section('scripts')
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function () {
     // buat megambil data buku
@@ -142,8 +121,6 @@ document.addEventListener('DOMContentLoaded', function () {
         console.error('Error fetching data:', error);
     });
 });
-
 </script>
+@endsection
 
-</body>
-</html>

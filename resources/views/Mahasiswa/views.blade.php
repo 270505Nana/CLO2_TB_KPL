@@ -84,13 +84,13 @@
                               <td><p class="text-xs font-weight-bold mb-0">${mahasiswa.nomor_hp}</p></td>
                             
                               <td class="align-middle text-center">
-                                  <a href="/editmahasiswa/${mahasiswa.nim}" class="text-secondary font-weight-bold text-xs me-2" data-toggle="tooltip" title="Edit Mahasiswa">
-                                      <i class="ni ni-ruler-pencil text-lg opacity-10"></i>
+                                  <a href="/editmahasiswa/${mahasiswa.nim}" class="text-secondary font-weight-bold" data-toggle="tooltip" title="Edit Mahasiswa">
+                                      <i class="bi bi-pencil-square"></i>
                                   </a>
                                   <button class="btn-delete text-secondary mx-2" 
                                       data-nim="${mahasiswa.nim}" 
                                       style="background: none; border: none; padding: 0; cursor: pointer;">
-                                      <i class="ni ni-fat-remove text-lg" aria-hidden="true"></i>
+                                      <i class="bi bi-trash3-fill"></i>
                                   </button>
                               </td>
                           `;

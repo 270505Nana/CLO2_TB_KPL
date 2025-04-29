@@ -77,7 +77,7 @@
 
     <!-- Include SweetAlert2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src={{ assets('assets/js/argon-dashboard.min.js?v=2.1.0') }}></script>
+    {{-- <script src={{ assets('assets/js/argon-dashboard.min.js?v=2.1.0') }}></script> --}}
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {

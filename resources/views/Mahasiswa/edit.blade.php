@@ -1,23 +1,10 @@
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>@yield('title', 'Mahasiswa')</title>
+{{-- Menerapkan layouts dari master --}}
+@extends('layouts.master')
 
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
-  <link href="https://demos.creative-tim.com/argon-dashboard-pro/assets/css/nucleo-icons.css" rel="stylesheet" />
-  <link href="https://demos.creative-tim.com/argon-dashboard-pro/assets/css/nucleo-svg.css" rel="stylesheet" />
-  <link id="pagestyle" href="{{ asset('assets/css/argon-dashboard.css?v=2.1.0') }}" rel="stylesheet" />
-</head>
+{{-- yang kemudian dibawah sini dibuat section section yang nntinya akan di yield di file master --}}
+@section('page-title', 'Update Data Mahasiswa')
 
-<body class="g-sidenav-show bg-gray-100">
-  <div class="min-height-300 bg-primary position-absolute w-100"></div>
-  @include('layouts.sidebar')
-
-  <div class="main-content position-relative max-height-vh-100 h-100">
-    @include('layouts.sidebar')
-    
+@section('content')
     <div class="card shadow-lg mx-4 card-profile-top mt-4">
       <div class="card-body p-3">
         <div class="row gx-5">
@@ -95,14 +82,14 @@
     </div>
   </div>
   
-  {{-- penggunaan code reuse --}}
-  @include('layouts.footer')
+  @endsection
 
+  @section('scripts')
+  
   <!-- Include SweetAlert2 -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <script src={{ asset('assets/js/argon-dashboard.min.js?v=2.1.0') }}></script>
-
   <script>
+
   document.getElementById('form-mahasiswa').addEventListener('submit', async function(e) {
       e.preventDefault();
 
@@ -144,5 +131,4 @@
       }
   });
 </script>
-</body>
-</html>
+@endsection

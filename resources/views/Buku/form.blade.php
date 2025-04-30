@@ -23,7 +23,7 @@
       <div class="card">
         <div class="card-header pb-0">
           <div class="d-flex align-items-center">
-              <button type="submit" form="form-buku" class="btn btn-success btn-sm ms-auto">Simpan Buku</button>
+              <button type="submit" form="form-buku" class="btn btn-success btn-sm ms-auto">Simpan Data</button>
           </div>
         </div>
 

@@ -5,11 +5,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\BukuController;
 use App\Http\Controllers\PeminjamanController;
+use App\Models\Peminjaman;
 
-
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:sanctum');
+// Route::get('/user', function (Request $request) {
+//     return $request->user();
+// })->middleware('auth:sanctum');
 
 // API UNTUK DATA MAHASISWA
 Route::prefix('mahasiswa')->group(function () {
@@ -29,6 +29,8 @@ Route::prefix('buku')->group(function () {
 
 // API UNTUK DATA PEMINJAMAN
 Route::prefix('peminjaman')->group(function () {
+    Route::get('/',[PeminjamanController::class, 'show'])->name('peminjaman.index');
+    Route::post('/',[PeminjamanController::class, 'store'])->name('peminjaman.store');
     Route::put('/{id}', [PeminjamanController::class, 'update'])->name('peminjaman.update'); 
     Route::delete('/delete/{id}', [PeminjamanController::class, 'destroy'])->name('peminjaman.destroy');
 });

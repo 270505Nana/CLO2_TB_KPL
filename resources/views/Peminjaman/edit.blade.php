@@ -274,7 +274,7 @@
 
                     if (response.ok) {
                         alert(result.message);
-                        window.location.href = "{{ route('peminjaman.show') }}";
+                        window.location.href = "{{ route('data.peminjaman') }}";
                     } else {
                         alert('Gagal memperbarui data: ' + result.message);
                     }

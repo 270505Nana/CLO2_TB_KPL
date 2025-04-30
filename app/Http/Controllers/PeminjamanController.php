@@ -9,41 +9,82 @@ use Illuminate\Http\Request;
 
 class PeminjamanController extends Controller
 {
-    // Menampilkan semua data peminjaman
+    // // Menampilkan semua data peminjaman
+    // public function show()
+    // {
+    //     $peminjamans = Peminjaman::all();
+    //     return view('peminjaman.views', compact('peminjamans'));
+    // }
+
     public function show()
     {
-        $peminjamans = Peminjaman::all();
-        return view('peminjaman.views', compact('peminjamans'));
+        try {
+            $dataPeminjaman = Peminjaman::with('mahasiswa', 'buku')->get(); 
+    
+            if ($dataPeminjaman->isEmpty()) {
+                return response()->json([
+                    'code' => 404,
+                    'status' => 'empty',
+                    'message' => 'Tidak ada data peminjaman.'
+                ], 404);
+            }
+    
+            return response()->json([
+                'code' => 200,
+                'status' => 'success',
+                'data' => $dataPeminjaman
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'code' => 500,
+                'status' => 'error',
+                'message' => 'Gagal mengambil data peminjaman.',
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
-
-    // Menampilkan form tambah data peminjaman
-    public function create()
-    {
-        $mahasiswa = Mahasiswa::all();
-        $buku = Buku::all();
-        return view('peminjaman.form', compact('mahasiswa', 'buku'));
-    }
-
-    // Menyimpan data peminjaman baru
+    
     public function store(Request $request)
     {
-        $request->validate([
-            'nim' => 'required',
-            'id_buku' => 'required',
-            'tanggal_pinjam' => 'required|date',
-            'tanggal_kembali' => 'required|date',
-        ]);
-
-        Peminjaman::create([
-            'nim' => $request->nim,
-            'id_buku' => $request->id_buku,
-            'tanggal_pinjam' => $request->tanggal_pinjam,
-            'tanggal_kembali' => $request->tanggal_kembali,
-        ]);
-
-        return redirect()->route('peminjaman.show')->with('success', 'Data peminjaman berhasil disimpan!');
+        try {
+            // Validasi data
+            $request->validate([ //penerapan defensive programming
+                'nim' => 'required',
+                'id_buku' => 'required',
+                'tanggal_pinjam' => 'required|date',
+                'tanggal_kembali' => 'required|date',
+            ]);
+    
+            $peminjaman = Peminjaman::create([
+                'nim' => $request->nim,
+                'id_buku' => $request->id_buku,
+                'tanggal_pinjam' => $request->tanggal_pinjam,
+                'tanggal_kembali' => $request->tanggal_kembali,
+            ]);
+    
+            return response()->json([
+                'status' => 'success',
+                'code' => 200,
+                'data' => $peminjaman,
+                // redirect ke api untuk show
+                'redirect' => route('peminjaman.index') 
+            ], 200); 
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            // Mengembalikan validasi error 
+            return response()->json([
+                'status' => 'error',
+                'code' => 422,
+                'message' => 'Validasi gagal: ' . $e->getMessage()
+            ], 500); 
+        } catch (\Exception $e) {
+            // Mengembalikan respon error 
+            return response()->json([
+                'status' => 'error',
+                'code' => 500,
+                'message' => 'Terjadi kesalahan: ' . $e->getMessage()
+            ], 500); 
+        }
     }
-
 
     // untuk menampilkan form edit buku
     public function edit($id)

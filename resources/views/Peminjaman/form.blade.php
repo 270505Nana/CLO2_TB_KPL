@@ -150,7 +150,7 @@
             <div class="card-header pb-0">
               <div class="d-flex align-items-center">
                 <h6 class="mb-0">Isi Data Peminjaman</h6>
-                <button type="submit" form="form-peminjaman" class="btn btn-success btn-sm ms-auto">Tambah Data</button>
+                <button type="submit" form="form-peminjaman" class="btn btn-success btn-sm ms-auto">Simpan Data</button>
               </div>
             </div>
 
@@ -165,25 +165,23 @@
                       <label for="id_buku">Judul Buku</label>
                       <select class="form-control" name="id_buku" id="id_buku" required>
                         <option value="">-- Pilih Buku --</option>
-                        @foreach($buku as $b)
-                          <option value="{{ $b->id }}" {{ old('id_buku') == $b->id ? 'selected' : '' }}>{{ $b->judul}}</option>
-                        @endforeach
                       </select>
+
                       @error('id_buku')
                         <small class="text-danger">{{ $message }}</small>
                       @enderror
                     </div>
                   </div>
 
+                  
+
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="nim">Nama Mahasiswa</label>
                       <select class="form-control" name="nim" id="nim" required>
-                            <option value="">-- Pilih Mahasiswa --</option>
-                            @foreach($mahasiswa as $m)
-                                <option value="{{ $m->nim }}" {{ old('nim') == $m->nim ? 'selected' : '' }}>{{ $m->nama }}</option>
-                            @endforeach
-                        </select>
+                        <option value="">-- Pilih Mahasiswa --</option>
+                      </select>
+
                       @error('nim')
                         <small class="text-danger">{{ $message }}</small>
                       @enderror
@@ -209,14 +207,9 @@
                       @enderror
                     </div>
                   </div>
-
-                 
-
                 </div>
-
               </form>
             </div>
-          
           </div>
         </div>
       </div>
@@ -231,6 +224,64 @@
   <script src="{{ asset('assets/js/plugins/smooth-scrollbar.min.js') }}"></script>
   <script src="{{ asset('assets/js/argon-dashboard.min.js?v=2.1.0') }}"></script>
 
-</body>
+  <script>
+    // get form by id 'form-peminjaman' eventnya submit
+    document.getElementById('form-peminjaman').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+        const response = await fetch('/api/peminjaman', { 
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'X-CSRF-TOKEN': '{{ csrf_token() }}' 
+          },
+          body: formData
+        });
+        const result = await response.json();
+        // Notification
+        if (response.ok) {
+          alert('Data peminjaman berhasil ditambahkan!');
+          // return kepada page /datapeminjaman
+          window.location.href = '/datapeminjaman'; 
+        } else {alert('Gagal menambahkan data: ' + (result.message || 'Unknown error'));}
+        
+      } catch (error) {
+        console.error('Error:', error);
+        alert('Terjadi kesalahan jaringan');
+      }
+    });
+    
+    document.addEventListener('DOMContentLoaded', async function () {
+      try {
+        // Ambil data buku
+        const bukuResponse = await fetch('/api/buku');
+        const bukuResult = await bukuResponse.json();
 
+        if (bukuResult.status === 'success') {
+          const bukuSelect = document.getElementById('id_buku');
+          bukuResult.data.forEach(buku => {
+            const option = document.createElement('option');
+            option.value = buku.id;
+            option.textContent = buku.judul;
+            bukuSelect.appendChild(option);
+          });
+        }
+        const mahasiswaResponse = await fetch('/api/mahasiswa');
+        const mahasiswaResult = await mahasiswaResponse.json();
+
+        if (mahasiswaResult.status === 'success') {
+          const mhsSelect = document.getElementById('nim');
+          mahasiswaResult.data.forEach(mhs => {
+            const option = document.createElement('option');
+            option.value = mhs.nim;
+            option.textContent = mhs.nama;
+            mhsSelect.appendChild(option);
+          });
+        }
+      } catch (error) {
+        console.error('Gagal fetch data:', error);
+      }
+    });
+  </script>
+</body>
 </html>

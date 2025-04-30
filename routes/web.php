@@ -24,9 +24,6 @@ Route::get('/tambahdatabuku', function () {
 // Menampilkan form edit buku
 Route::get('/editbuku/{id}', [BukuController::class, 'edit'])->name('buku.edit');
 
-
-
-
 // =========================== MAHASISWA ========================================================
 
 // Menampilkan seluruh data mahasiswa
@@ -45,15 +42,19 @@ Route::get('/editmahasiswa/{nim}', [MahasiswaController::class, 'edit'])->name('
 // =========================== PEMINJAMAN ========================================================
 
 // Menampilkan seluruh data peminjaman
-Route::get('/datapeminjaman', [PeminjamanController::class, 'show'])->name('peminjaman.show');
+// Route::get('/datapeminjaman', [PeminjamanController::class, 'show'])->name('peminjaman.show');
 
-// Menampilkan form tambah peminjaman
-Route::get('/tambahpeminjaman', [PeminjamanController::class, 'create'])->name('peminjaman.create');
+Route::get('/datapeminjaman', function () {
+    return view('peminjaman.views'); 
+})->name('data.peminjaman');
 
-// post peminjaman
-Route::post('/tambahpeminjaman', [PeminjamanController::class, 'store'])->name('peminjaman.store');
+Route::get('/tambahpeminjaman', function () {
+    return view('peminjaman.form');
+})->name('tambah.peminjaman');
 
-// Menampilkan form edit mahasiswa
 Route::get('/editpeminjaman/{id}', [PeminjamanController::class, 'edit'])->name('peminjaman.edit');
 
-
+// Menampilkan form tambah peminjaman
+// Route::get('/tambahpeminjaman', [PeminjamanController::class, 'create'])->name('peminjaman.create');
+// post peminjaman
+// Route::post('/tambahpeminjaman', [PeminjamanController::class, 'store'])->name('peminjaman.store');

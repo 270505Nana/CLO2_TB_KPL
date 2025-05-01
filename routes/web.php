@@ -41,9 +41,6 @@ Route::get('/editmahasiswa/{nim}', [MahasiswaController::class, 'edit'])->name('
 
 // =========================== PEMINJAMAN ========================================================
 
-// Menampilkan seluruh data peminjaman
-// Route::get('/datapeminjaman', [PeminjamanController::class, 'show'])->name('peminjaman.show');
-
 Route::get('/datapeminjaman', function () {
     return view('peminjaman.views'); 
 })->name('data.peminjaman');
@@ -53,8 +50,3 @@ Route::get('/tambahpeminjaman', function () {
 })->name('tambah.peminjaman');
 
 Route::get('/editpeminjaman/{id}', [PeminjamanController::class, 'edit'])->name('peminjaman.edit');
-
-// Menampilkan form tambah peminjaman
-// Route::get('/tambahpeminjaman', [PeminjamanController::class, 'create'])->name('peminjaman.create');
-// post peminjaman
-// Route::post('/tambahpeminjaman', [PeminjamanController::class, 'store'])->name('peminjaman.store');

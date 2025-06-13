@@ -44,6 +44,7 @@
       <div class="row align-items-center">
         <div class="col-8">
           <p class="text-sm mb-0 font-weight-bold">Jumlah Peminjaman</p>
+
           <h5 class="font-weight-bolder">{{ $jumlahPeminjam}}</h5>
         </div>
         <div class="col-4 text-end">

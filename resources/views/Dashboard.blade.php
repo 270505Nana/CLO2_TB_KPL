@@ -6,7 +6,7 @@
 
 @section('content')
 <div class="row">
-    
+
   <div class="col-xl-3 col-sm-6 mb-4">
     <div class="card p-3">
       <div class="row align-items-center">
@@ -44,7 +44,8 @@
       <div class="row align-items-center">
         <div class="col-8">
           <p class="text-sm mb-0 font-weight-bold">Jumlah Peminjaman</p>
-          <h5 class="font-weight-bolder">{{ $jumlahBuku }}</h5>
+
+          <h5 class="font-weight-bolder">{{ $jumlahPeminjam}}</h5>
         </div>
         <div class="col-4 text-end">
           <div class="icon icon-shape bg-gradient-success shadow-primary text-center rounded-circle mx-auto">

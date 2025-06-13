@@ -1,25 +1,22 @@
-
-{{-- Menerapkan layouts dari master --}}
 @extends('layouts.master')
 
-{{-- yang kemudian dibawah sini dibuat section section yang nntinya akan di yield di file master --}}
-@section('page-title', 'Update Data Mahasiswa')
+@section('page-title', 'Tambah Data Mahasiswa')
 
 @section('content')
-  <div class="card shadow-lg mx-4 card-profile-top mt-4">
-    <div class="card-body p-3">
-      <div class="row gx-5">
-      
-        <div class="col-auto my-auto">
-          <div class="h-100">
-            <h5 class="mb-1">
-              Form Tambah Data Mahasiswa
-            </h5>
+    <div class="card shadow-lg mx-4 card-profile-top mt-4">
+      <div class="card-body p-3">
+        <div class="row gx-5">
+         
+          <div class="col-auto my-auto">
+            <div class="h-100">
+              <h5 class="mb-1">
+                Form Tambah Data Mahasiswa
+              </h5>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
 
   {{-- card form tambah data bukunya --}}
   <div class="container-fluid py-4">
@@ -98,28 +95,26 @@
                   </div>
                 </div>
 
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="example-text-input" class="form-control-label">Nomor Handphone Mahasiswa</label>
-                    <input type="number" name="nomor_hp" class="form-control" placeholder="Masukkan nomor telepon mahasiswa" required value="{{ old('nomor_hp') }}">
-                    @error('nomor_hp')
-                      <div class="alert alert-danger mt-1">{{ $message }}</div>
-                    @enderror
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="example-text-input" class="form-control-label">Nomor Handphone Mahasiswa</label>
+                      <input type="number" name="nomor_hp" class="form-control" placeholder="Masukkan nomor telepon mahasiswa" required value="{{ old('nomor_hp') }}">
+                      @error('nomor_hp')
+                        <div class="alert alert-danger mt-1">{{ $message }}</div>
+                      @enderror
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </form>
+            </form>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-@endsection
+  @endsection
 
 @section('scripts')
-
-  <!-- Include SweetAlert2 -->
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script>
     // get form by id 'form-mahasiswa' eventnya submit
     document.getElementById('form-mahasiswa').addEventListener('submit', async function(e) {

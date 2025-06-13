@@ -41,7 +41,7 @@ class MahasiswaController extends Controller
     public function store(Request $request)
     {
         try {
-            // Validasi data
+            // Validasi data dan menerapkan teknik konstruksi Defensive Programming
             $request->validate([
                 'nim' => 'required|unique:mahasiswas,nim',
                 'nama' => 'required|string|max:255',
@@ -65,7 +65,7 @@ class MahasiswaController extends Controller
             return response()->json([
                 'status' => 'success',
                 'code' => 200,
-                'data' => $mahasiswa,            
+                'data' => $mahasiswa,
             ], 200);
         } catch (\Illuminate\Validation\ValidationException $e) {
             return response()->json([
@@ -82,14 +82,14 @@ class MahasiswaController extends Controller
         }
     }
 
-    
-    //delete mahasiswa 
+
+    //delete mahasiswa
     public function destroy($nim)
     {
         try {
             $mahasiswa = Mahasiswa::where('nim', $nim)->firstOrFail();
             $mahasiswa->delete();
-    
+
             return response()->json([
                 'code' => 200,
                 'status' => 'success',
@@ -124,10 +124,10 @@ class MahasiswaController extends Controller
                 'angkatan' => 'required|integer|min:1900|max:' . date('Y'),
                 'nomor_hp' => 'required|string|max:20',
             ]);
-    
+
             // Cari mahasiswa berdasarkan nim
             $mahasiswa = Mahasiswa::where('nim', $nim)->firstOrFail();
-    
+
             // Update data mahasiswa kecuali nim
             $mahasiswa->update([
                 'nama' => $request->nama,
@@ -136,7 +136,7 @@ class MahasiswaController extends Controller
                 'angkatan' => $request->angkatan,
                 'nomor_hp' => $request->nomor_hp,
             ]);
-    
+
             // Kembalikan response sukses
             return response()->json([
                 'status' => 'success',
@@ -144,7 +144,7 @@ class MahasiswaController extends Controller
                 'message' => 'Data mahasiswa berhasil diupdate!',
                 'data' => $mahasiswa,
             ], 200);
-    
+
         } catch (\Illuminate\Validation\ValidationException $e) {
             return response()->json([
                 'status' => 'error',
@@ -159,6 +159,6 @@ class MahasiswaController extends Controller
             ], 500);
         }
     }
-    
-    
+
+
 }

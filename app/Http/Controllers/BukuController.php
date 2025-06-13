@@ -49,7 +49,7 @@ class BukuController extends Controller
                 'tahun_terbit' => 'required|integer',
                 'genre' => 'required|string|max:255',
             ]);
-    
+
             // Membuat data buku baru
             $buku = Buku::create([
                 'judul' => $request->judul,
@@ -58,37 +58,37 @@ class BukuController extends Controller
                 'tahun_terbit' => $request->tahun_terbit,
                 'genre' => $request->genre,
             ]);
-    
+
             return response()->json([
                 'status' => 'success',
                 'code' => 200,
                 'data' => $buku,
-                'redirect' => route('buku.index') 
-            ], 200); 
+                'redirect' => route('buku.index')
+            ], 200);
         } catch (\Illuminate\Validation\ValidationException $e) {
-            // Mengembalikan validasi error 
+            // Mengembalikan validasi error
             return response()->json([
                 'status' => 'error',
                 'code' => 422,
                 'message' => 'Validasi gagal: ' . $e->getMessage()
-            ], 500); 
+            ], 500);
         } catch (\Exception $e) {
-            // Mengembalikan respon error 
+            // Mengembalikan respon error
             return response()->json([
                 'status' => 'error',
                 'code' => 500,
                 'message' => 'Terjadi kesalahan: ' . $e->getMessage()
-            ], 500); 
+            ], 500);
         }
     }
-    
 
+    //untuk menghapus data buku berdasarkan id
     public function destroy($id)
     {
         try {
             $buku = Buku::findOrFail($id);
             $buku->delete();
-    
+
             return response()->json([
                 'code' => 200,
                 'status' => 'success',
